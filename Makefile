@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/09/22 01:49:33 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/10 14:04:10 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = lem-in
 CC = gcc
 FLAG = -Wall -Wextra -Werror -O3
 LFT = ./libft/libft.a
-SRCS = ./source/main.c
+SRCS = ./source/main.c ./source/parsing.c
 
 OBJS = $(SRCS:.c=.o)
 
