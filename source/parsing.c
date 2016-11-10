@@ -6,35 +6,35 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/10 21:13:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/10 22:57:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/common.h"
 
-void	parsing_ants(t_env *env, char **line)
+void	parsing_ants(t_env *env, char *line)
 {
 	uint8_t	i;
+	uint8_t	len;
 
 	i = 0;
-	printf("%zu\n", ft_strlen(*line));
-	if (ft_strlen(*line) <= 3 && ft_atoi(*line) < UINT8_MAX && ft_atoi(*line) > 0)
+	len = ft_strlen(line);
+	if (ft_strlen(line) <= 3 && ft_atoi(line) < UINT8_MAX && ft_atoi(line) > 0)
 	{
-		while (i < ft_strlen(*line))
+		while (i < len)
 		{
-			if (ft_isdigit(ft_atoi(line[i])) == 1)
+			if (line[i] < '0' || line[i] > '9')
 			{
-				printf("Ants : bad information\n");
+				ft_fprintf(2, RED"Ants : bad information\n"END);
 				exit(-1);
 			}
 			++i;
 		}
-		env->nb_ants = ft_atoi(*line);
-		printf(RED"%d\n"END, env->nb_ants);
+		env->nb_ants = ft_atoi(line);
 	}
 	else
 	{
-		printf("Ants : bad information\n");
+		ft_fprintf(2, RED"Ants : bad information\n"END);
 		exit(-1);
 	}
 }
@@ -50,7 +50,7 @@ void	parsing_map_stdin(t_env *env)
 	{
 		if (ants == 0)
 		{
-			parsing_ants(env, &line);
+			parsing_ants(env, line);
 			ants = 1;
 		}
 		free(line);
