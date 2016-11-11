@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/10 14:04:10 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/11 15:00:03 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,15 @@ END = \033[0m
 ##################################_COMPILATION_#################################
 NAME = lem-in
 CC = gcc
-FLAG = -Wall -Wextra -Werror -O3
+FLAG = -Wall -Wextra -Werror
 LFT = ./libft/libft.a
 SRCS = ./source/main.c ./source/parsing.c
+INCLUDE = -I ./include/ -I ./libft/includes/
 
 OBJS = $(SRCS:.c=.o)
 
 ###########################_RELINK_MODIFY_.h####################################
-RELINK_H = ./include/lemin.h
+RELINK_H = ./include/common.h
 ################################################################################
 
 ###################################Compilation##################################
@@ -33,13 +34,13 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -s -C ./libft/
-	@$(CC) $(FLAG) $(LFT) $(OBJS) -o $(NAME)
+	@$(CC) $(LFT) $(OBJS) -o $(NAME)
 	@printf "✅  Compilation done.\n"
 
 %.o : %.c $(RELINK_H) ./Makefile
 	@printf "                                                               \r"
 	@printf "✅  $(notdir $<)\r"
-	@$(CC) -c $(FLAG) $< -o $@
+	@$(CC) -c $(FLAG) $< $(INCLUDE) -o $@
 
 clean:
 	@printf "                                                               \r"
