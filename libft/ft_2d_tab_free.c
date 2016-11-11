@@ -6,18 +6,21 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 19:28:43 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/27 11:50:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/11 19:27:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-void	ft_tab_free(char **tab)
+void	ft_2d_tab_free(char **tab, int size)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
+	while (i < size)
+	{
+		free(tab[i]);
+		++i;
+	}
 	free(tab);
 }
