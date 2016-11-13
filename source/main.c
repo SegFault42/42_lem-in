@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/11 22:49:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/13 22:12:47 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void	check_error_gnl(char **line)
 int	main(int argc, char **argv)
 {
 	t_env	env;
-	t_ctrl		ctrl;
 
-	ctrl.first = NULL;
 	memset(&env, 0, sizeof(env));
 	if (argc == 1)
-		parsing_map_stdin(&env, &ctrl);
+		save_map(&env);
+	parsing_map_stdin(&env);
 	/*else if (argc == 2)*/
 		/*parsing_map_file(&env);*/
 	(void)argc;
