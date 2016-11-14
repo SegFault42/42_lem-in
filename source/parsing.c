@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/13 22:42:44 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/14 22:29:14 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,28 @@
 
 void	parsing_rooms(t_env *env)
 {
+	int		i;
+	char	**tmp;
 
+	i = env->ants_line;
+	env->room_list = (char **)malloc(sizeof(char *) * env->room_line);
+	while (i <= env->room_line)
+	{
+		/*printf(RED"%s\n"END, env->map[i]);*/
+		if (ft_strstr(env->map[i], " ") != NULL)
+		{
+			tmp = ft_strsplit(env->map[i], ' ');
+			env->room_list[i - 1] = ft_memalloc(ft_strlen(tmp[0]) + ft_strlen(tmp[1]) + ft_strlen(tmp[2]) + 2); // alloc tab for 3 string (room name, x, y and 2 separators)
+			ft_strcat(env->room_list[i - 1], tmp[0]); //*
+			ft_strcat(env->room_list[i - 1], "#");    //*
+			ft_strcat(env->room_list[i - 1], tmp[1]); //*-> cp all room info in env->room_list
+			ft_strcat(env->room_list[i - 1], "#");    //*
+			ft_strcat(env->room_list[i - 1], tmp[2]); //*
+			ft_2d_tab_free(tmp, 3); // free tmp tab 
+			printf(ORANGE"%s\n"END, env->room_list[i-1]);
+		}
+		++i;
+	}
 }
 
 void	parsing_ants(t_env *env)
@@ -65,4 +86,5 @@ void	parsing_map_stdin(t_env *env)
 
 	printf("room_line = %d\n", env->room_line);
 	printf("link_line = %d\n", env->link_line);
+	/*sleep(10);*/
 }

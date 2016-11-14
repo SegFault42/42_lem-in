@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/11 19:03:26 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/14 14:08:47 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,13 @@ HEAD = ./includes/ ./ft_fprintf/includes/ft_fprintf.h
 all: $(NAME)
 
 $(NAME): $(OBJS) ./includes/libft.h
-	$(CC) $(FLAG) -c $(SRC) -I $(HEAD)
+	@$(CC) $(FLAG) -c $(SRC) -I $(HEAD)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 %.o : %.c $(HEAD)
-	@printf "                                                               \r"
-	@printf "✅  $(notdir $<)\r"
-	$(CC) -c $(FLAG) $< -o $@
+	@printf "\e[32m.\e[0m"
+	@$(CC) -c $(FLAG) $< -o $@
 
 mc: fclean all clean
 
