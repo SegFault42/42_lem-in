@@ -5,20 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:37:05 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/15 17:53:42 by rabougue         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_if_room_is_valid.c                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:50:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/15 17:31:09 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/15 23:37:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +23,12 @@ static void	check_nb_space(char *str)
 	{
 		if (str[i] == ' ')
 			++space;
-		if (space > 2)
-		{
-			ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);
-			exit(EXIT_FAILURE);
-		}
 		++i;
+	}
+	if (space != 2)
+	{
+		ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -75,7 +63,6 @@ static void	check_coord_x_y(char *str)
 		while (str[i] != ' ' && str[i] != '\0')
 		{
 			++nb_digit;
-			ft_fprintf(2, YELLOW"%c"END, str[i]);
 			if (ft_isdigit(str[i]) == 0 || nb_digit > 10)
 			{
 				ft_fprintf(2, RED"Room line error : x or y coord contain invalid caractere\n"END, str);
@@ -84,7 +71,6 @@ static void	check_coord_x_y(char *str)
 			++i;
 		}
 		++loop;
-		ft_fprintf(2, CYAN"loop = %d, nb digit = %d\n"END, loop, nb_digit);
 		nb_digit = 0;
 		++i;
 	}
@@ -98,12 +84,12 @@ void	check_if_room_is_valid(char *str)
 	check_nb_space(str);
 	check_forbidden_character(str);
 	check_coord_x_y(str);
-	while (str[i] != '\0')
-		++i;
-	--i;
-	if (ft_isdigit(str[i]) == 0 || ft_isdigit(str[i - 2]) == 0)
-	{
-		ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);
-		exit(EXIT_FAILURE);
-	}
+	/*while (str[i] != '\0')*/
+		/*++i;*/
+	/*--i;*/
+	/*if (ft_isdigit(str[i]) == 0 || ft_isdigit(str[i - 2]) == 0)*/
+	/*{*/
+		/*ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);*/
+		/*exit(EXIT_FAILURE);*/
+	/*}*/
 }

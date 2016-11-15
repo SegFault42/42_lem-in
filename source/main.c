@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/13 22:12:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/15 23:43:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 	parsing_map_stdin(&env);
 	/*else if (argc == 2)*/
 		/*parsing_map_file(&env);*/
+	ft_2d_tab_free(env.map, env.ants_line + env.room_line + env.link_line);
 	(void)argc;
 	(void)argv;
 }
