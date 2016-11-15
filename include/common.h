@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/14 21:58:21 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/15 14:51:14 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void					print_error_ants();
 
 
 void					save_map(t_env *env);
+
+void					check_if_room_is_valid(char *str);
 
 #endif

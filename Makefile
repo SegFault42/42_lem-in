@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/14 22:01:33 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/15 14:52:24 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ NAME = lem-in
 CC = gcc
 FLAG = -Wall -Wextra -Werror
 LFT = ./libft/libft.a
-SRCS = ./source/main.c ./source/parsing.c ./source/map.c
+SRCS = ./source/main.c ./source/parsing.c ./source/map.c \
+	   ./source/check_if_room_is_valid.c
+
 INCLUDE = -I ./include/ -I ./libft/includes/
 
 OBJS = $(SRCS:.c=.o)
