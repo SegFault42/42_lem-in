@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:28:57 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/15 23:35:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/16 11:40:32 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	save_map(t_env *env)
 {
 	char	*line;
 	int		i;
-	int		ret;
 
 	line = NULL;
 	i = 1;
-		/*printf("%d\n", ret);*/
-	while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
+	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		check_error_gnl(&line);
 		alloc_tab(env, line, i);
@@ -59,6 +57,11 @@ void	save_map(t_env *env)
 		free(line);
 	}
 	env->nb_lines_map = i;
+	if (env->nb_lines_map == 1)
+	{
+		ft_fprintf(2, RED"ERROR\n"END);
+		exit(EXIT_FAILURE);
+	}
 	// print tab
 	for (int j = 0; j < i -1; j++)
 		printf("%s\n", env->map[j]);

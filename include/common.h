@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/15 14:51:14 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:53:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct			s_env
 	int					nb_lines_map; // nb line of all map
 
 	char				**room_list; // all rooms stored in room_list tab
+	char				*start;
+	char				*end;
 }						t_env;
 /*
 ** parsing.c
