@@ -1,10 +1,10 @@
 214
-##start
 salle_1 10 90
-##end
+##start
 salle_2 5 0
 salle_3 89 9
 salle_4 9 0
+##end
 salle_5 13 0
 0-2
 2-3

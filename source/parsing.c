@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/16 16:38:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/17 13:18:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,20 @@ void	get_start_room(t_env *env, char *line, uint8_t start_end)
 		++len_line;
 		++i;
 	}
-	if (start_end == 1)
+	if (start_end == 1 && env->start == NULL)
 		env->start = ft_strsub(line, 0, len_line);
-	else if (start_end == 2)
+	else
+	{
+		ft_fprintf(2, RED"Multiple start room\n"END);
+		exit(EXIT_FAILURE);
+	}
+	if (start_end == 2 && env->end == NULL)
 		env->end = ft_strsub(line, 0, len_line);
-
+	else
+	{
+		ft_fprintf(2, RED"Multiple end room\n"END);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	parsing_rooms(t_env *env)
@@ -104,8 +113,7 @@ void	count_part_map(t_env *env)
 	i = 1;
 	while (i < env->nb_lines_map -1)
 	{
-		if (ft_strstr(env->map[i], "##start") != NULL ||
-			ft_strstr(env->map[i], "##end") != NULL ||
+		if (ft_strstr(env->map[i], "#") != NULL ||
 			ft_strstr(env->map[i], " ") != NULL)
 			++env->room_line;
 		else if (ft_strstr(env->map[i], "-") != NULL)
@@ -119,7 +127,11 @@ void	parsing_map_stdin(t_env *env)
 	count_part_map(env); // count number lines of map part (ants numbers, room number, link number)
 	parsing_ants(env); //get ants number
 	parsing_rooms(env); // get rooms
-
+	if (env->start == NULL || env->end == NULL)
+	{
+		ft_fprintf(2, RED"Start or end missing !\n"END);
+		exit(EXIT_FAILURE);
+	}
 	printf("room_line = %d\n", env->room_line);
 	printf("link_line = %d\n", env->link_line);
 	/*sleep(10);*/
