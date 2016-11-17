@@ -6,11 +6,25 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/17 13:18:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/17 18:48:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+static void	check_if_start_end_exist(t_env *env, uint8_t start_end)
+{
+	if (env->start != NULL && start_end == 1)
+	{
+		ft_fprintf(2, RED"Error : Multiple start !\n"END);
+		exit(EXIT_FAILURE);
+	}
+	if (env->end != NULL && start_end == 2)
+	{
+		ft_fprintf(2, RED"Error : Multiple end !\n"END);
+		exit(EXIT_FAILURE);
+	}
+}
 
 void	get_start_room(t_env *env, char *line, uint8_t start_end)
 {
@@ -19,26 +33,16 @@ void	get_start_room(t_env *env, char *line, uint8_t start_end)
 
 	i = 0;
 	len_line = 0;
-	ft_fprintf(2, YELLOW"%s\n"END, line);
+	check_if_start_end_exist(env, start_end);
 	while (line[i] != ' ')
 	{
 		++len_line;
 		++i;
 	}
-	if (start_end == 1 && env->start == NULL)
+	if (start_end == 1)
 		env->start = ft_strsub(line, 0, len_line);
-	else
-	{
-		ft_fprintf(2, RED"Multiple start room\n"END);
-		exit(EXIT_FAILURE);
-	}
-	if (start_end == 2 && env->end == NULL)
+	else if (start_end == 2)
 		env->end = ft_strsub(line, 0, len_line);
-	else
-	{
-		ft_fprintf(2, RED"Multiple end room\n"END);
-		exit(EXIT_FAILURE);
-	}
 }
 
 void	parsing_rooms(t_env *env)
@@ -52,11 +56,12 @@ void	parsing_rooms(t_env *env)
 	start_end = 0;
 	i = env->ants_line;
 	env->room_list = (char **)malloc(sizeof(char *) * env->room_line);
+			ft_fprintf(2, YELLOW"%d\n"END, env->room_line);
 	while (i <= env->room_line)
 	{
-		if (ft_strstr(env->map[i], "##start") != NULL)
+		if (ft_strstr(env->map[i], "##start") != NULL && ft_strlen(env->map[i]) == 7)
 			start_end = 1;
-		else if (ft_strstr(env->map[i], "##end") != NULL)
+		else if (ft_strstr(env->map[i], "##end") != NULL && ft_strlen(env->map[i]) == 5)
 			start_end = 2;
 		if (ft_strstr(env->map[i], " ") != NULL)
 		{
@@ -76,7 +81,6 @@ void	parsing_rooms(t_env *env)
 			}
 			j = 0;
 			ft_2d_tab_free(tmp, 3); // free tmp tab 
-			printf(ORANGE"%s\n"END, env->room_list[i-1]);
 		}
 		++i;
 	}
@@ -111,6 +115,8 @@ void	count_part_map(t_env *env)
 	int	i;
 
 	i = 1;
+	while(ft_strstr(env->map[i], "#") != NULL)
+		++i;
 	while (i < env->nb_lines_map -1)
 	{
 		if (ft_strstr(env->map[i], "#") != NULL ||
@@ -132,7 +138,4 @@ void	parsing_map_stdin(t_env *env)
 		ft_fprintf(2, RED"Start or end missing !\n"END);
 		exit(EXIT_FAILURE);
 	}
-	printf("room_line = %d\n", env->room_line);
-	printf("link_line = %d\n", env->link_line);
-	/*sleep(10);*/
 }
