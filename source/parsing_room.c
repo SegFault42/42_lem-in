@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:41:41 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/18 19:07:35 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/18 22:17:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	parsing_rooms(t_env *env)
 	{
 		if (env->map[i][0] == '#' && ft_strcmp(env->map[i], "##start") != 0 && ft_strcmp(env->map[i], "##end") != 0 && i++)
 			continue ; // ignore comment
-		if (ft_strstr(env->map[i], "##start") != NULL && ft_strlen(env->map[i]) == 7)
+		if (ft_strcmp(env->map[i], "##start") == 0)
 			start_end = 1;
-		else if (ft_strstr(env->map[i], "##end") != NULL && ft_strlen(env->map[i]) == 5)
+		else if (ft_strcmp(env->map[i], "##end") == 0)
 			start_end = 2;
 		if (ft_strstr(env->map[i], " ") != NULL)
 		{

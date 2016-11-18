@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:50:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/18 17:34:54 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/18 22:47:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_nb_space(char *str)
 			++space;
 		++i;
 	}
-	if (space != 2)
+	if (space != 2 || str[--i] == ' ')
 	{
 		ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);
 		exit(EXIT_FAILURE);
