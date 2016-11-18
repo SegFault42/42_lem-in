@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/16 14:53:26 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/18 17:41:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ typedef struct			s_env
 ** parsing.c
 */
 void					parsing_map_stdin(t_env *env);
-//void					parsing_ants(t_env *env, char *line);
+void					parsing_ants(t_env *env);
 void					parsing_rooms(t_env *env);
+void					parsing_link(t_env *env);
 
 void					check_error_gnl(char **line);
 void					print_error_ants();

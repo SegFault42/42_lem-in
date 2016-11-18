@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:50:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/17 18:24:32 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/18 17:34:54 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,7 @@ static void	check_coord_x_y(char *str)
 
 void	check_if_room_is_valid(char *str)
 {
-	int	i;
-
-	i = 0;
 	check_nb_space(str);
 	check_forbidden_character(str);
 	check_coord_x_y(str);
-	/*while (str[i] != '\0')*/
-		/*++i;*/
-	/*--i;*/
-	/*if (ft_isdigit(str[i]) == 0 || ft_isdigit(str[i - 2]) == 0)*/
-	/*{*/
-		/*ft_fprintf(2, RED"Room line error : X or Y coord not valid\n"END);*/
-		/*exit(EXIT_FAILURE);*/
-	/*}*/
 }

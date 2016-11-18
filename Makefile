@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/15 14:52:24 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/18 18:16:46 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ CC = gcc
 FLAG = -Wall -Wextra -Werror
 LFT = ./libft/libft.a
 SRCS = ./source/main.c ./source/parsing.c ./source/map.c \
-	   ./source/check_if_room_is_valid.c
+	   ./source/check_if_room_is_valid.c ./source/parsing_room.c \
+	   ./source/parsing_link.c \
 
 INCLUDE = -I ./include/ -I ./libft/includes/
 
