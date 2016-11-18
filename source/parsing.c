@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/17 18:48:26 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/18 12:18:24 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	parsing_rooms(t_env *env)
 	j = 0;
 	start_end = 0;
 	i = env->ants_line;
-	env->room_list = (char **)malloc(sizeof(char *) * env->room_line);
 			ft_fprintf(2, YELLOW"%d\n"END, env->room_line);
+	env->room_list = (char **)malloc(sizeof(char *) * env->room_line);
 	while (i <= env->room_line)
 	{
 		if (ft_strstr(env->map[i], "##start") != NULL && ft_strlen(env->map[i]) == 7)
@@ -115,15 +115,14 @@ void	count_part_map(t_env *env)
 	int	i;
 
 	i = 1;
-	while(ft_strstr(env->map[i], "#") != NULL)
+	while (ft_strstr(env->map[i], "-") == NULL)
+	{
+		env->room_line++;
 		++i;
+	}
 	while (i < env->nb_lines_map -1)
 	{
-		if (ft_strstr(env->map[i], "#") != NULL ||
-			ft_strstr(env->map[i], " ") != NULL)
-			++env->room_line;
-		else if (ft_strstr(env->map[i], "-") != NULL)
-			++env->link_line;
+		env->link_line++;
 		++i;
 	}
 }
