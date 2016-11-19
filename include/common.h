@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 11:06:24 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/19 22:39:29 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct			s_env
 {
-	char				**map; // map stored int this var
+	char				**map; // map stored int this char **
 
 	int					nb_ants; // nb ants
 	int					nb_rooms; // nb rooms
@@ -39,17 +39,25 @@ typedef struct			s_env
 /*
 ** parsing.c
 */
-void					parsing_map_stdin(t_env *env);
-void					parsing_ants(t_env *env);
-void					parsing_rooms(t_env *env);
-void					parsing_link(t_env *env);
-
-void					check_error_gnl(char **line);
-void					print_error_ants();
-
-
+bool					parsing_map_stdin(t_env *env);
+/*
+** map.c
+*/
+void					alloc_tab(t_env *env, char *line, int size);
 void					save_map(t_env *env);
+/*
+** parsing_ants.c
+*/
+bool					check_ants_valid(t_env *env);
+/*
+** parsing_room.c
+*/
+bool					get_rooms(t_env *env);
+/*
+** main.c
+*/
+void					check_error_gnl(char **line);
+void					print_error_ants(char **map, int y_tab);
 
-void					check_if_room_is_valid(char *str);
 
 #endif

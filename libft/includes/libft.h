@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/15 23:36:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/20 00:17:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <stdint.h>
+# include <stdbool.h>
 # include "../ft_fprintf/includes/ft_fprintf.h"
 # include "./colors.h"
 
 # define BUFF_SIZE 10
 # define TRUE 1
 # define FALSE 0
+# define ERROR -1
 # define RC ft_putchar('\n');
 
 typedef struct		s_list
@@ -117,5 +121,6 @@ size_t				ft_size_ttoa(size_t n);
 
 char				**ft_memalloc_2d(size_t size_1, size_t size_2);
 void				ft_print_2d_tab(char **tab, int size_y);
+bool				check_int_overflow(long nb);
 
 #endif

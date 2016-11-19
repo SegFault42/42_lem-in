@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_int_overflow.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 22:39:42 by rabougue         ###   ########.fr       */
+/*   Created: 2016/11/19 21:40:26 by rabougue          #+#    #+#             */
+/*   Updated: 2016/11/19 21:45:29 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "common.h"
+#include "./includes/libft.h"
 
-bool	parsing_map_stdin(t_env *env)
+bool	check_int_overflow(long nb)
 {
-	if (check_ants_valid(env) == EXIT_FAILURE)
+	char	*number;
+
+	if (nb > INT_MAX || nb < INT_MIN)
 		return (EXIT_FAILURE);
-	get_rooms(env);
+	number = ft_ltoa(nb);
+	if (ft_strlen(number) > 11)
+	{
+		free(number);
+		return (EXIT_FAILURE);
+	}
+	free(number);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 18:54:55 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/04 09:14:32 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/19 22:17:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	int i;
 
-	i = 0;
 	if (s != NULL)
-	{
-		while (s[i] != '\0')
-		{
-			ft_putchar_fd(s[i], fd);
-			i++;
-		}
-	}
+		write(fd, s, ft_strlen(s));
 }

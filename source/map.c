@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:28:57 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 17:31:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/19 17:44:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	save_map(t_env *env)
 		i++;
 		free(line);
 	}
-	env->nb_lines_map = i;
+	env->nb_lines_map = i - 1; // Why -1 ? because i is instancied at 1
 	if (env->nb_lines_map == 1)
 	{
 		ft_fprintf(2, RED"ERROR\n"END);

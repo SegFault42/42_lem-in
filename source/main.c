@@ -6,15 +6,16 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 17:31:56 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/19 23:34:02 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-void	print_error_ants()
+void	print_error_ants(char **map, int y_tab)
 {
 	ft_fprintf(2, RED"Ants : bad information\n"END);
+	ft_2d_tab_free(map, y_tab);
 	exit(EXIT_FAILURE);
 }
 
@@ -36,7 +37,9 @@ int	main(int argc, char **argv)
 		save_map(&env);
 	/*else if (argc == 2)*/
 		/*parsing_map_file(&env);*/
-	ft_2d_tab_free(env.map, env.ants_line + env.room_line + env.link_line);
+	if (parsing_map_stdin(&env) == EXIT_FAILURE)
+		print_error_ants(env.map, env.nb_lines_map);
+	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;
 	(void)argv;
 }
