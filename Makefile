@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/18 18:16:46 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/19 17:17:19 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,8 @@ NAME = lem-in
 CC = gcc
 FLAG = -Wall -Wextra -Werror
 LFT = ./libft/libft.a
-SRCS = ./source/main.c ./source/parsing.c ./source/map.c \
-	   ./source/check_if_room_is_valid.c ./source/parsing_room.c \
-	   ./source/parsing_link.c \
+SRC = ./source
+SRCS = $(SRC)/main.c $(SRC)/map.c
 
 INCLUDE = -I ./include/ -I ./libft/includes/
 
@@ -56,3 +55,7 @@ fclean:
 	@make -s fclean -C ./libft/
 
 re: fclean all
+
+norme:
+	norminette ./include/common.h ./libft/*.c ./libft/includes/*.h ./source/*.c \
+		./libft/ft_fprintf/includes/ft_fprintf.h ./libft/ft_fprintf/sources/*.c

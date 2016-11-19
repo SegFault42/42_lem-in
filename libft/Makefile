@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/18 11:29:19 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/19 09:57:36 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ RED = \033[38;5;9m
 END = \033[0m
 X = 0
 Y = 0
-CLEAR = clear
 
 PRE = ./ft_fprintf/sources/
 
@@ -51,17 +50,15 @@ HEAD = ./includes/ ./ft_fprintf/includes/ft_fprintf.h
 
 all: $(NAME)
 
-clear :
-	@clear
-
-$(NAME): clear $(OBJS) ./includes/libft.h
+$(NAME): $(OBJS) ./includes/libft.h
 	@$(CC) $(FLAG) -c $(SRC) -I $(HEAD)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 %.o : %.c $(HEAD)
 	@$(eval X=$(shell echo $$(($(X)+1))))
-	@echo "\x1b[0;$(X)H#"
+	@$(eval Y=$(shell echo $$(($(Y)+1))))
+	@echo "\x1b[$(Y);$(X)H#"
 	@echo "\x1b[0;0H["
 	@echo "\x1b[0;88H]"
 	@$(CC) -c $(FLAG) $< -o $@
