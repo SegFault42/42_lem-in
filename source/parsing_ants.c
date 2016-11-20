@@ -6,13 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 17:49:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 22:42:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/20 10:39:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "common.h"
-
 
 bool	check_ants_valid(t_env *env)
 {

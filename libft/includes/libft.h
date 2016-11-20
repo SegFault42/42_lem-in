@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/20 00:17:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/20 12:54:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define BUFF_SIZE 10
 # define TRUE 1
 # define FALSE 0
-# define ERROR -1
+# define EXIT_ERROR -1
 # define RC ft_putchar('\n');
 
 typedef struct		s_list
@@ -105,7 +105,6 @@ void				ft_2d_tab_free(char **tab, int size);
 int					ft_tab_len(char **tab);
 double				ft_sqrt(double a);
 long				ft_atol(const char *str);
-void				ft_count_2d_tab(char **tab);
 char				*ft_itoa_base(int value, int base);
 size_t				ft_strclen(const char *s, char c);
 char				*ft_hexa_itoa(unsigned int n, int up);
@@ -122,5 +121,6 @@ size_t				ft_size_ttoa(size_t n);
 char				**ft_memalloc_2d(size_t size_1, size_t size_2);
 void				ft_print_2d_tab(char **tab, int size_y);
 bool				check_int_overflow(long nb);
+int					ft_count_2d_tab(char **tab);
 
 #endif
