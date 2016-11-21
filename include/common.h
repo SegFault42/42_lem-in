@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 11:28:17 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 17:33:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@
 # include <stdio.h>
 # include "../libft/includes/libft.h"
 
-# define ERROR_ANTS 2
-# define ERROR_ROOM 3
+# define EXIT_ERROR_ANTS 2
+# define EXIT_ERROR_ROOM 3
+
 # define ANTS 1
 # define CMD 2
 # define ROOM 3
 # define CMT 4
 # define LINK 5
+# define LINE_ERROR 6
 
 typedef struct			s_env
 {
@@ -58,7 +60,7 @@ typedef struct			s_env
 /*
 ** parsing.c
 */
-bool					parsing_map_stdin(t_env *env);
+int8_t					parsing_map_stdin(t_env *env);
 /*
 ** map.c
 */
@@ -67,7 +69,7 @@ void					save_map(t_env *env);
 /*
 ** parsing_ants.c
 */
-bool					check_ants_valid(t_env *env);
+int8_t					check_ants_valid(t_env *env);
 /*
 ** parsing_room.c
 */
@@ -78,6 +80,10 @@ void					stock_all(t_env *env);
 */
 void					check_error_gnl(char **line);
 void					print_error_ants(char **map, int y_tab);
-
+/*
+** parsing_command_and_comment.c
+*/
+int8_t					check_if_is_command(char *line);
+int8_t					check_if_is_comment(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 11:56:12 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 16:22:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,53 @@ void	fill_room_link_cmt_cmd(t_env *env)
 {
 	int	i;
 	int	browse_tab;
+	int	loop;
+	int	iter[4];
 
 	i = 0;
 	browse_tab = 0;
+	loop = 0;
+	ft_memset(iter, 0, sizeof(int) * 4);
 	while (i < env->nb_lines_map)
 	{
 		if (env->index_map[i] == ROOM)
 		{
-			env->room[browse_tab] = ft_strdup(env->map[i]);
-			ft_fprintf(1, ORANGE"%s\n"END, env->room[browse_tab]);
-			++browse_tab;
+			env->room[iter[0]] = ft_strdup(env->map[i]);
+			ft_fprintf(1, YELLOW"%s\n"END, env->room[iter[0]]);
+			++iter[0];
 		}
-		++i;
-	}
-	i = 0;
-	browse_tab = 0;
-	while (i < env->nb_lines_map)
-	{
-		if (env->index_map[i] == LINK)
+		else if (env->index_map[i] == LINK)
 		{
-			env->link[browse_tab] = ft_strdup(env->map[i]);
-			ft_fprintf(1, PURPLE"%s\n"END, env->link[browse_tab]);
-			++browse_tab;
+			env->link[iter[1]] = ft_strdup(env->map[i]);
+			ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[1]]);
+			++iter[1];
+		}
+		else if (env->index_map[i] == CMD)
+		{
+			env->cmd[iter[2]] = ft_strdup(env->map[i]);
+			ft_fprintf(1, RED"%s\n"END, env->cmd[iter[2]]);
+			++iter[2];
+		}
+		else if (env->index_map[i] == CMT)
+		{
+			env->cmt[iter[3]] = ft_strdup(env->map[i]);
+			ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[3]]);
+			++iter[3];
 		}
 		++i;
 	}
+	/*i = 0;*/
+	/*browse_tab = 0;*/
+	/*while (i < env->nb_lines_map)*/
+	/*{*/
+		/*if (env->index_map[i] == LINK)*/
+		/*{*/
+			/*env->link[browse_tab] = ft_strdup(env->map[i]);*/
+			/*ft_fprintf(1, PURPLE"%s\n"END, env->link[browse_tab]);*/
+			/*++browse_tab;*/
+		/*}*/
+		/*++i;*/
+	/*}*/
 }
 
 void	alloc_room_link_cmt_cmd(t_env *env)
@@ -102,12 +124,3 @@ void	stock_all(t_env *env)
 		/*ft_fprintf(1, GREEN"%s\n"END, env->cmd[q]);*/
 }
 
-bool	parsing_map_stdin(t_env *env)
-{
-	if (check_ants_valid(env) == EXIT_FAILURE)
-		return (ERROR_ANTS);
-	if (count_all(env) == EXIT_ERROR)
-		return (ERROR_ROOM);
-	stock_all(env);
-	return (EXIT_SUCCESS);
-}

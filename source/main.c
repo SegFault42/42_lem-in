@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/20 23:46:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 16:49:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,31 @@ void	check_error_gnl(char **line)
 	}
 }
 
+int8_t	parsing_map_stdin(t_env *env)
+{
+	if (check_ants_valid(env) == EXIT_FAILURE)
+		return (EXIT_ERROR_ANTS);
+	if (count_all(env) == EXIT_ERROR_ROOM)
+		return (EXIT_ERROR_ROOM);
+	stock_all(env);
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv)
 {
 	t_env	env;
 	int8_t	ret;
 
+	ret = 0;
 	memset(&env, 0, sizeof(env));
 	if (argc == 1)
 		save_map(&env);
 	/*else if (argc == 2)*/
 		/*parsing_map_file(&env);*/
 	ret = parsing_map_stdin(&env);
-	if (ret == ERROR_ANTS)
+	if (ret == EXIT_ERROR_ANTS)
 		print_error_ants(env.map, env.nb_lines_map);
-	else if (ret == ERROR_ROOM)
+	else if (ret == EXIT_ERROR_ROOM)
 		print_error_room(env.map, env.nb_lines_map);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;
