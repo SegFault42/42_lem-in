@@ -17,3 +17,4 @@
 ./lem-in < map
 ./lem-in < map
 ./lem-in < map
+./lem-in < map

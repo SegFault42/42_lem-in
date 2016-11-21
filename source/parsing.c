@@ -6,11 +6,42 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 00:10:39 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 11:56:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+void	fill_room_link_cmt_cmd(t_env *env)
+{
+	int	i;
+	int	browse_tab;
+
+	i = 0;
+	browse_tab = 0;
+	while (i < env->nb_lines_map)
+	{
+		if (env->index_map[i] == ROOM)
+		{
+			env->room[browse_tab] = ft_strdup(env->map[i]);
+			ft_fprintf(1, ORANGE"%s\n"END, env->room[browse_tab]);
+			++browse_tab;
+		}
+		++i;
+	}
+	i = 0;
+	browse_tab = 0;
+	while (i < env->nb_lines_map)
+	{
+		if (env->index_map[i] == LINK)
+		{
+			env->link[browse_tab] = ft_strdup(env->map[i]);
+			ft_fprintf(1, PURPLE"%s\n"END, env->link[browse_tab]);
+			++browse_tab;
+		}
+		++i;
+	}
+}
 
 void	alloc_room_link_cmt_cmd(t_env *env)
 {
@@ -29,11 +60,11 @@ void	alloc_room_link_cmt_cmd(t_env *env)
 			++env->nb_cmt_line;
 		++i;
 	}
-	/*ft_fprintf(1, RED"%d\n"END, env->nb_cmd_line);*/
-	env->room = (char **)ft_memalloc(env->nb_rooms_line);
-	env->link = (char **)ft_memalloc(env->nb_link_line);
-	env->cmd = (char **)ft_memalloc(env->nb_cmd_line);
-	env->cmt = (char **)ft_memalloc(env->nb_cmt_line);
+	env->room = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
+	env->link = (char **)ft_memalloc(sizeof(char *) * env->nb_link_line);
+	env->cmd = (char **)ft_memalloc(sizeof(char *) * env->nb_cmd_line);
+	env->cmt = (char **)ft_memalloc(sizeof(char *) * env->nb_cmt_line);
+	fill_room_link_cmt_cmd(env);
 }
 
 void	stock_all(t_env *env)
@@ -50,30 +81,25 @@ void	stock_all(t_env *env)
 	d = -1;
 	i = -1;
 	alloc_room_link_cmt_cmd(env); // don't forget to free all !
-	printf("%s\n", env->cmd[0]);
 	while (i < env->nb_lines_map)
 	{
 		if (env->index_map[i] == ROOM)
 			env->room[a++] = ft_strdup(env->map[i]);
 		/*else if (env->index_map[i] == LINK)*/
 			/*env->link[b++] = ft_strdup(env->map[i]);*/
-		else if (env->index_map[i] == CMD)
-		{
-			ft_fprintf(1, RED"i = %d, %s\n"END,i , env->map[i]);
-			env->cmd[c++] = ft_strdup(env->map[i]);
-		}
+		/*else if (env->index_map[i] == CMD)*/
+		/*{*/
+			/*ft_fprintf(1, RED"i = %d, %s\n"END,i , env->map[i]);*/
+			/*env->cmd[c++] = ft_strdup(env->map[i]);*/
+		/*}*/
 		/*else if (env->index_map[i] == CMT && ++d)*/
 			/*env->cmt[d] = ft_strdup(env->map[i]);*/
 		++i;
 	}
-	i = 0;
-	while (i < env->nb_rooms_line)
-	{
-		ft_fprintf(1, GREEN"%s\n"END, env->room[i]);
-		++i;
-	}
-	for (int q = 0; q < env->nb_cmd_line; ++q)
-		ft_fprintf(1, GREEN"%s\n"END, env->cmd[q]);
+	/*for (i = 0; i < env->nb_rooms_line; ++i)*/
+		/*ft_fprintf(1, GREEN"%s\n"END, env->room[i]);*/
+	/*for (int q = 0; q < env->nb_cmd_line; ++q)*/
+		/*ft_fprintf(1, GREEN"%s\n"END, env->cmd[q]);*/
 }
 
 bool	parsing_map_stdin(t_env *env)

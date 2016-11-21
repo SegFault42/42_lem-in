@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/20 23:09:17 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 11:28:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct			s_env
 	char				**cmt; // all comment stored here
 	char				**link; // all link stored here
 
+	int					nb_lines_map; // nb line of all map
 	int					nb_rooms_line; // nb room_line only
 	int					nb_cmd_line; // nb cmd_line only
 	int					nb_cmt_line; // nb cmt_line only
@@ -50,7 +51,6 @@ typedef struct			s_env
 	int					ants_line; // nb ants_line
 	int					room_line; // nb room_line (all line between ants line and before link_line)
 	int					link_line; //nb link_line (all line at the first link_line)
-	int					nb_lines_map; // nb line of all map
 
 	char				*start;
 	char				*end;
