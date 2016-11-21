@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 20:46:19 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 00:07:43 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int8_t					check_ants_valid(t_env *env);
 ** parsing_room.c
 */
 int8_t					count_all(t_env *env);
-void					stock_all(t_env *env);
+int8_t					stock_all(t_env *env);
 /*
 ** main.c
 */

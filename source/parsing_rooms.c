@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:05:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 20:46:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 23:06:56 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int8_t	check_room_valid(char *line)
 
 int8_t	check_nb_cmd(t_env *env)
 {
-	ft_fprintf(1, CYAN"%d\n"END, env->nb_cmd_line);
 	if (env->nb_cmd_line != 2)
 		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);
@@ -61,6 +60,8 @@ int8_t	count_all(t_env *env)
 	i = 1;
 	env->index_map = (int *)ft_memalloc(sizeof(int) * env->nb_lines_map); // dont't forget to free !*/
 	env->index_map[0] = ANTS;
+	
+	ft_fprintf(1, "%d\n", env->nb_ants);
 	while (i < env->nb_lines_map)
 	{
 		if (ft_strstr(env->map[i], "-") != NULL && env->map[i][0] != '#') // exit function when a line link found
@@ -72,28 +73,28 @@ int8_t	count_all(t_env *env)
 			++env->nb_link_line;
 			continue ;
 		}
-		if (check_if_is_command(env->map[i]) == EXIT_SUCCESS)
+		else if (check_if_is_command(env->map[i]) == EXIT_SUCCESS)
 		{
 			env->index_map[i] = CMD;
 			++i;
 			++env->nb_cmd_line;
 			continue ;
 		}
-		if (check_if_is_comment(env->map[i]) == EXIT_SUCCESS)
+		else if (check_if_is_comment(env->map[i]) == EXIT_SUCCESS)
 		{
 			env->index_map[i] = CMT;
 			++i;
 			++env->nb_cmt_line;
 			continue ;
 		}
-			ret_check_room = check_room_valid(env->map[i]);
-			if (ret_check_room == EXIT_ERROR_ROOM)
-				return (EXIT_ERROR_ROOM);
-			else if (ret_check_room == EXIT_SUCCESS)
-			{
-				env->index_map[i] = ROOM;
-				++env->nb_rooms_line;
-			}
+		ret_check_room = check_room_valid(env->map[i]);
+		if (ret_check_room == EXIT_ERROR_ROOM)
+			return (EXIT_ERROR_ROOM);
+		else if (ret_check_room == EXIT_SUCCESS)
+		{
+			env->index_map[i] = ROOM;
+			++env->nb_rooms_line;
+		}
 		++i;
 	}
 	if (check_nb_cmd(env) == EXIT_ERROR_CMD)

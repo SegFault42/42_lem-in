@@ -5,20 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 00:07:46 by rabougue          #+#    #+#             */
+/*   Updated: 2016/11/22 00:07:46 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 20:51:22 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 00:07:14 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-void	print_error(char **map, int y_tab, int8_t errnum)
+void	print_error(char **map, int y_tab, int8_t err_num)
 {
-	if (errnum == EXIT_ERROR_ANTS)
+	if (err_num == EXIT_ERROR_ANTS)
 		ft_fprintf(2, RED"Ants : bad information\n"END);
-	if (errnum == EXIT_ERROR_ROOM)
+	if (err_num == EXIT_ERROR_ROOM)
 		ft_fprintf(2, RED"Room : bad information\n"END);
-	if (errnum == EXIT_ERROR_CMD)
+	if (err_num == EXIT_ERROR_CMD)
 		ft_fprintf(2, RED"CMD : bad information\n"END);
 	ft_2d_tab_free(map, y_tab);
 	exit(EXIT_FAILURE);
@@ -42,9 +54,10 @@ int8_t	parsing_map_stdin(t_env *env)
 	error = count_all(env);
 	if (error == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
-	/*else if (error == EXIT_ERROR_LINK)*/
-		/*return (EXIT_ERROR_LINK);*/
-	stock_all(env);
+	else if (error == EXIT_ERROR_ROOM)
+		return (EXIT_ERROR_ROOM);
+	if (stock_all(env) == EXIT_ERROR_CMD)
+		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);
 }
 
