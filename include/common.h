@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 17:33:39 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/21 20:46:19 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@
 # include <stdio.h>
 # include "../libft/includes/libft.h"
 
-# define EXIT_ERROR_ANTS 2
-# define EXIT_ERROR_ROOM 3
+# define EXIT_ERROR_LINK	1
+# define EXIT_ERROR_ANTS	2
+# define EXIT_ERROR_ROOM	3
+# define EXIT_ERROR_CMD		4
 
-# define ANTS 1
-# define CMD 2
-# define ROOM 3
-# define CMT 4
-# define LINK 5
-# define LINE_ERROR 6
+# define ANTS				1
+# define CMD				2
+# define ROOM				3
+# define CMT				4
+# define LINK				5
+# define LINE_ERROR			6
 
 typedef struct			s_env
 {
