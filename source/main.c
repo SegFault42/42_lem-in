@@ -5,20 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 00:07:46 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 00:07:46 by rabougue         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 00:07:14 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 14:31:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +20,8 @@ void	print_error(char **map, int y_tab, int8_t err_num)
 		ft_fprintf(2, RED"Room : bad information\n"END);
 	if (err_num == EXIT_ERROR_CMD)
 		ft_fprintf(2, RED"CMD : bad information\n"END);
+	if (err_num == EXIT_ERROR_LINK)
+		ft_fprintf(2, RED"LINK : bad information\n"END);
 	ft_2d_tab_free(map, y_tab);
 	exit(EXIT_FAILURE);
 }
@@ -43,6 +33,28 @@ void	check_error_gnl(char **line)
 		ft_fprintf(2, RED"GNL_EXIT_ERROR !\n"END);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int8_t	check_multiple_same_rooms(t_env *env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < env->nb_rooms_line)
+	{
+		j++;
+		while (j < env->nb_rooms_line)
+		{
+			if (ft_strcmp(env->room[i], env->room[j]) == 0)
+				return (EXIT_ERROR_ROOM);
+			++j;
+		}
+		++i;
+		j = i;
+	}
+	return (EXIT_SUCCESS);
 }
 
 int8_t	parsing_map_stdin(t_env *env)
@@ -58,6 +70,13 @@ int8_t	parsing_map_stdin(t_env *env)
 		return (EXIT_ERROR_ROOM);
 	if (stock_all(env) == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
+	if (check_multiple_same_rooms(env) == EXIT_ERROR_ROOM)
+		return (EXIT_ERROR_ROOM);
+	if (parsing_link(env) == EXIT_ERROR_LINK)
+		return (EXIT_ERROR_LINK);
+	/*if (check_multiple_same_rooms(env))*/
+		/*return (EXIT_ERROR_ROOM);*/
+
 	return (EXIT_SUCCESS);
 }
 

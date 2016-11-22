@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 00:07:43 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 12:50:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct			s_env
 	int					nb_cmt_line; // nb cmt_line only
 	int					nb_link_line; // nb link_line only
 
-
 	int					nb_ants; // nb ants
 	int					nb_rooms; // nb rooms
 
@@ -63,6 +62,7 @@ typedef struct			s_env
 ** parsing.c
 */
 int8_t					parsing_map_stdin(t_env *env);
+int8_t					check_multiple_same_rooms(t_env *env);
 /*
 ** map.c
 */
@@ -77,6 +77,7 @@ int8_t					check_ants_valid(t_env *env);
 */
 int8_t					count_all(t_env *env);
 int8_t					stock_all(t_env *env);
+int8_t					parsing_room(t_env *env);
 /*
 ** main.c
 */
@@ -87,5 +88,6 @@ void					print_error_ants(char **map, int y_tab);
 */
 int8_t					check_if_is_command(char *line);
 int8_t					check_if_is_comment(char *line);
+int8_t					parsing_link(t_env *env);
 
 #endif

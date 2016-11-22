@@ -6,11 +6,39 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:05:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/21 23:06:56 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 13:47:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+/*int8_t	parsing_room(t_env *env)*/
+/*{*/
+	/*int	i;*/
+	/*int	j;*/
+	/*int	k;*/
+
+	/*i = 0;*/
+	/*j = 0;*/
+	/*k = 0;*/
+	/*while(i < env->nb_lines_map)*/
+	/*{*/
+		/*while (env->index_map[j] != ROOM)*/
+			/*++j;*/
+		/*k = j++;*/
+		/*while (k < env->nb_lines_map)*/
+		/*{*/
+			/*if (ft_strcmp(env->map[j], env->map[k]) == 0)*/
+			/*{*/
+				/*return (EXIT_ERROR_ROOM);*/
+			/*}*/
+			/*++k;*/
+		/*}*/
+		/*++j;*/
+		/*++i;*/
+	/*}*/
+	/*return (EXIT_SUCCESS);*/
+/*}*/
 
 int8_t	check_forbidden_charactere(char *line)
 {
@@ -52,6 +80,38 @@ int8_t	check_nb_cmd(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
+/*int8_t	check_multiple_same_rooms(t_env *env)*/
+/*{*/
+	/*char	**split;*/
+	/*int		i;*/
+	/*int		j;*/
+
+	/*i = 0;*/
+	/*j = 0;*/
+	/*while (i < env->nb_lines_map)*/
+	/*{*/
+		/*while (env->index_map[i] != ROOM)*/
+			/*++i;*/
+		/*split = ft_strsplit(env->map[i], ' ');*/
+		/*j = i++;*/
+		/*while (j < env->nb_lines_map)*/
+		/*{*/
+			/*ft_fprintf(1, "%s, %s\n", split[0], env->map[j]);*/
+			/*if (ft_strcmp(split[0], env->map[j]) == 0)*/
+				/*return (EXIT_ERROR_ROOM);*/
+			/*j++;*/
+		/*}*/
+		/*ft_fprintf(1, "\n");*/
+		/*i++;*/
+	/*}*/
+
+
+
+	/*for(int j = 0; j < env->nb_lines_map; j++)*/
+		/*ft_fprintf(1, CYAN"%s\n"END, env->map[j]);*/
+	/*return (EXIT_SUCCESS);*/
+/*}*/
+
 int8_t	count_all(t_env *env)
 {
 	int		i;
@@ -60,7 +120,6 @@ int8_t	count_all(t_env *env)
 	i = 1;
 	env->index_map = (int *)ft_memalloc(sizeof(int) * env->nb_lines_map); // dont't forget to free !*/
 	env->index_map[0] = ANTS;
-	
 	ft_fprintf(1, "%d\n", env->nb_ants);
 	while (i < env->nb_lines_map)
 	{
@@ -97,6 +156,8 @@ int8_t	count_all(t_env *env)
 		}
 		++i;
 	}
+	/*if (check_multiple_same_rooms(env) == EXIT_ERROR_ROOM)*/
+		/*return (EXIT_ERROR_ROOM);*/
 	if (check_nb_cmd(env) == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/20 12:54:15 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 09:53:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ char				**ft_memalloc_2d(size_t size_1, size_t size_2);
 void				ft_print_2d_tab(char **tab, int size_y);
 bool				check_int_overflow(long nb);
 int					ft_count_2d_tab(char **tab);
+int					ft_count_char(char *str, char c);
 
 #endif
