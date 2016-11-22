@@ -1,30 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/11 14:56:50 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/15 01:27:06 by rabougue         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "./includes/libft.h"
-
 static int	split_stat(char **line, char **stat)
 {
 	char	*content2;
 	int		len;
 
-	content2 = NULL;
 	if (!(*stat))
 		return (0);
 	if ((content2 = ft_strchr(*stat, '\n')))
 	{
 		len = content2 - *stat;
 		*line = ft_strsub(*stat, 0, len);
-		free(*stat);
 		if (ft_strlen(++content2))
 			*stat = ft_strdup(content2);
 		else
@@ -72,10 +56,7 @@ int			get_next_line(int const fd, char **line)
 	*line = NULL;
 	buf = ft_strnew(BUFF_SIZE);
 	if (split_stat(line, &stat[fd]) == 1)
-	{
-		free(buf);
 		return (1);
-	}
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';

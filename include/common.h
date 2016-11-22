@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 12:50:39 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/22 19:32:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int8_t					check_ants_valid(t_env *env);
 int8_t					count_all(t_env *env);
 int8_t					stock_all(t_env *env);
 int8_t					parsing_room(t_env *env);
+int8_t					check_room_valid(char *line);
 /*
 ** main.c
 */
@@ -89,5 +90,9 @@ void					print_error_ants(char **map, int y_tab);
 int8_t					check_if_is_command(char *line);
 int8_t					check_if_is_comment(char *line);
 int8_t					parsing_link(t_env *env);
+
+void					print_error(char **map, int y_tab, int8_t err_num);
+int8_t					check_nb_cmd(t_env *env);
+int8_t					check_nb_room(t_env *env);
 
 #endif
