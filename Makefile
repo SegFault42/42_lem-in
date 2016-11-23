@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/22 18:18:44 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/23 19:46:16 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRCS = $(SRC)/main.c \
 	   $(SRC)/parsing_command.c \
 	   $(SRC)/parsing_comment.c \
 	   $(SRC)/parsing_link.c \
-	   $(SRC)/error.c
+	   $(SRC)/error.c \
+	   $(SRC)/algo.c
 
 INCLUDE = -I ./include/ -I ./libft/includes/
 

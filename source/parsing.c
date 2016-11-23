@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 21:08:39 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:54:44 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int8_t	parsing_map_stdin(t_env *env)
 		return (EXIT_ERROR_ROOM);
 	if (parsing_link(env) == EXIT_ERROR_LINK)
 		return (EXIT_ERROR_LINK);
+	error = get_start_and_end(env);
+	if (error == EXIT_ERROR_ROOM || error == EXIT_ERROR_CMD) // because used first for ROOM
+		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);
 }
 

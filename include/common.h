@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 19:32:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:55:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct			s_env
 	char				**cmd; // all command stored here
 	char				**cmt; // all comment stored here
 	char				**link; // all link stored here
+	char				**room_link; // all room with link for algo
 
 	int					nb_lines_map; // nb line of all map
 	int					nb_rooms_line; // nb room_line only
@@ -94,5 +95,11 @@ int8_t					parsing_link(t_env *env);
 void					print_error(char **map, int y_tab, int8_t err_num);
 int8_t					check_nb_cmd(t_env *env);
 int8_t					check_nb_room(t_env *env);
+/*
+** algo.c
+*/
+int8_t					algo(t_env *env);
+
+int8_t					get_start_and_end(t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 18:09:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/23 19:45:48 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	main(int argc, char **argv)
 	ret = parsing_map_stdin(&env);
 	if (ret >= EXIT_ERROR_LINK && ret <= EXIT_ERROR_CMD)
 		print_error(env.map, env.nb_lines_map, ret);
+	get_start_and_end(&env);
+	ft_fprintf(1, "%s, %s\n", env.start, env.end);
+	algo(&env);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;
 	(void)argv;

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:05:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/22 19:32:08 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:55:34 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int8_t	check_room_valid(char *line)
 {
 	if (check_forbidden_charactere(line) == EXIT_ERROR_ROOM)
 		return (EXIT_ERROR_ROOM);
-	else if (check_split_line(line) == EXIT_ERROR_ROOM)
+	if (check_split_line(line) == EXIT_ERROR_ROOM)
 		return (EXIT_ERROR_ROOM);
 	return (EXIT_SUCCESS);
 }
@@ -67,7 +67,7 @@ int8_t	check_multiple_same_rooms(t_env *env)
 			if (ft_strcmp(env->room[i], env->room[j]) == 0)
 				return (EXIT_ERROR_ROOM);
 			++j;
-		}         
+		}
 		++i;
 		j = i;
 	}
