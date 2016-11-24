@@ -32,14 +32,25 @@
 void	count_nb_link_by_room(t_env *env)
 {
 	int	tab[env->nb_rooms_line + 1];
-	int		i;
+	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	ft_memset(tab, 0, env->nb_rooms_line);
-	while (i < env->nb_link_line)
-	{
-		
-	}
+	/*while (env->link)*/
+	/*{*/
+		ft_fprintf(1, "%s\n", env->room[0]);
+		/*while (j < env->nb_rooms_line)*/
+		/*{*/
+			/*if (ft_strcmp(env->link[i], env->room[j]) != 0)*/
+			/*{*/
+				
+			/*}*/
+			/*++j;*/
+		/*}*/
+		/*++i;*/
+	/*}*/
 }
 
 int8_t	algo(t_env *env)

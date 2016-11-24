@@ -88,6 +88,7 @@ int8_t	parsing_map_stdin(t_env *env)
 	error = get_start_and_end(env);
 	if (error == EXIT_ERROR_ROOM || error == EXIT_ERROR_CMD) // because used first for ROOM
 		return (EXIT_ERROR_CMD);
+		get_room_only(env);
 	return (EXIT_SUCCESS);
 }
 

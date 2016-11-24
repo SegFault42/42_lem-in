@@ -12,6 +12,54 @@
 
 #include "common.h"
 
+void	get_room_only(t_env *env)
+{
+	int	i;
+	int	len;
+	char **tmp;
+
+	i = 0;
+	len = 0;
+	tmp = (char **)ft_memalloc(sizeof(char *));
+	env->room_only = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
+	while (i < env->nb_rooms_line)
+	{
+		len += ft_strlen(env->room[i]);
+		++i;
+	}
+	len += i;
+	i = 0;
+	while (i < env->nb_rooms_line)
+	{
+		env->room_only[i] = (char *)ft_memalloc(sizeof(char) * (env->nb_rooms_line * len));
+		tmp = ft_strsplit(env->room[i], ' ');
+		ft_strcpy(env->room_only[i], tmp[0]);
+		ft_fprintf(1, PURPLE"%s\n"END, env->room_only[i]);
+		++i;
+		free(tmp[0]);
+	}
+}
+
+void	stock_link_with_room(t_env *env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < env->nb_link_line)
+	{
+		j = 0;
+		while (j < env->nb_link_line)
+		{
+			if (ft_strcmp(env->room[i], env->link[j]) == 0)
+			{
+				
+			}
+		}
+		++i;
+	}
+}
+
 int8_t	check_forbidden_charactere(char *line)
 {
 	if (line[0] == '#' || line[0] == 'L') // forbidden charactere
@@ -23,8 +71,10 @@ int8_t	check_split_line(char *line)
 {
 	char	**split;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	split = ft_strsplit(line, ' ');
 	i = ft_count_2d_tab(split);
 	if (i != 3)

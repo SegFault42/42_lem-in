@@ -123,5 +123,6 @@ void				ft_print_2d_tab(char **tab, int size_y);
 bool				check_int_overflow(long nb);
 int					ft_count_2d_tab(char **tab);
 int					ft_count_char(char *str, char c);
+int					ft_strccmp(const char *s1, const char *s2, char c);
 
 #endif

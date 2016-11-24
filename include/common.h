@@ -42,6 +42,7 @@ typedef struct			s_env
 	char				**cmt; // all comment stored here
 	char				**link; // all link stored here
 	char				**room_link; // all room with link for algo
+	char				**room_only;
 
 	int					nb_lines_map; // nb line of all map
 	int					nb_rooms_line; // nb room_line only
@@ -101,5 +102,6 @@ int8_t					check_nb_room(t_env *env);
 int8_t					algo(t_env *env);
 
 int8_t					get_start_and_end(t_env *env);
+void					get_room_only(t_env *env);
 
 #endif
