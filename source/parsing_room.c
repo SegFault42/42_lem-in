@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:05:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/23 17:55:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/25 20:48:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ void	get_room_only(t_env *env)
 	}
 }
 
+int8_t	check_if_room_is_stocked(char *line, char *link, char *room)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		ft_fprintf(1, BCYAN"line[i] = %c\n"END, line[i]);
+		ft_fprintf(1, BCYAN"room = %s, link = %s\n"END, room, link);
+		if (ft_strcmp(room, link) == 0)
+			return (false);
+		++i;
+	}
+	return (true);
+}
+
 void	stock_link_with_room(t_env *env)
 {
 	int	i;
@@ -53,19 +69,31 @@ void	stock_link_with_room(t_env *env)
 	{
 		j = 0;
 		room = ft_strdup(env->room_only[i]);
-		link = ft_strsplit(env->link[i], '-');
 		while (j < env->nb_link_line)
 		{
+			link = ft_strsplit(env->link[j], '-');
 			ft_fprintf(1, YELLOW"room = %s\n"END, room);
-			ft_fprintf(1, ORANGE"link[j] = %s\n"END, env->link[j]);
-			if (ft_strcmp(link[j], room) == 0)
+			ft_fprintf(1, ORANGE"link[0] = %s\n"END, link[0]);
+			if (ft_strcmp(room, link[0]) == 0)
 			{
-				
-				ft_strcat(env->room_only[i], ",");
+				if (check_if_room_is_stocked(env->room_only[i], link[1], room) == true)
+				{
+					ft_strcat(env->room_only[i], ",");
+					ft_strcat(env->room_only[i], link[1]);
+				}
+			}
+			else if (ft_strcmp(room, link[1]) == 0)
+			{
+				if (check_if_room_is_stocked(env->room_only[i], link[0], room) == true)
+				{
+					ft_strcat(env->room_only[i], ",");
+					ft_strcat(env->room_only[i], link[0]);
+				}
 			}
 			++j;
+			ft_2d_tab_free(link, 3);
 		}
-		ft_2d_tab_free(link, 3);
+		ft_fprintf(1, CYAN"%s\n"END, env->room_only[i]);
 		++i;
 	}
 }
