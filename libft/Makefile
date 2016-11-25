@@ -57,8 +57,8 @@ $(NAME): $(OBJS) ./includes/libft.h
 
 %.o : %.c $(HEAD)
 	@$(eval X=$(shell echo $$(($(X)+1))))
-	@$(eval Y=$(shell echo $$(($(Y)+1))))
-	@echo "\x1b[$(Y);$(X)H#"
+	#@$(eval Y=$(shell echo $$(($(Y)+1))))
+	@echo "\x1b[0;$(X)H#"
 	@echo "\x1b[0;0H["
 	@echo "\x1b[0;88H]"
 	@$(CC) -c $(FLAG) $< -o $@

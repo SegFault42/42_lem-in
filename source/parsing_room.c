@@ -44,18 +44,28 @@ void	stock_link_with_room(t_env *env)
 {
 	int	i;
 	int	j;
+	char	**link;
+	char	*room;
 
 	i = 0;
+	env->room_link = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
 	while (i < env->nb_link_line)
 	{
 		j = 0;
+		room = ft_strdup(env->room_only[i]);
+		link = ft_strsplit(env->link[i], '-');
 		while (j < env->nb_link_line)
 		{
-			if (ft_strcmp(env->room[i], env->link[j]) == 0)
+			ft_fprintf(1, YELLOW"room = %s\n"END, room);
+			ft_fprintf(1, ORANGE"link[j] = %s\n"END, env->link[j]);
+			if (ft_strcmp(link[j], room) == 0)
 			{
 				
+				ft_strcat(env->room_only[i], ",");
 			}
+			++j;
 		}
+		ft_2d_tab_free(link, 3);
 		++i;
 	}
 }
