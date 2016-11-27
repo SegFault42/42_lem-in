@@ -34,26 +34,36 @@ void	get_room_only(t_env *env)
 		env->room_only[i] = (char *)ft_memalloc(sizeof(char) * (env->nb_rooms_line * len));
 		tmp = ft_strsplit(env->room[i], ' ');
 		ft_strcpy(env->room_only[i], tmp[0]);
-		ft_fprintf(1, PURPLE"%s\n"END, env->room_only[i]);
+		/*ft_fprintf(1, PURPLE"%s\n"END, env->room_only[i]);*/
 		++i;
 		free(tmp[0]);
 	}
 }
 
-int8_t	check_if_room_is_stocked(char *line, char *link, char *room)
+int8_t	check_if_room_is_stocked(char *room_link, char *link)
 {
-	int	i;
+	char	**split;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (line[i])
+	j = 0;
+		i = 0;
+	split = ft_strsplit(room_link, ',');
+	while(split[i])
 	{
-		ft_fprintf(1, BCYAN"line[i] = %c\n"END, line[i]);
-		ft_fprintf(1, BCYAN"room = %s, link = %s\n"END, room, link);
-		if (ft_strcmp(room, link) == 0)
-			return (false);
+		j = 0;
+		while (split[j])
+		{
+			ft_fprintf(1, "split[j] = %s, split[i] = %s\n", split[i], split[j]);
+			if (ft_strcmp(split[i], split[j]) == 0)
+				return (true);
+			++j;
+		}
 		++i;
 	}
-	return (true);
+	return (false);
+	(void)link;
+	(void)room_link;
 }
 
 void	stock_link_with_room(t_env *env)
@@ -65,35 +75,29 @@ void	stock_link_with_room(t_env *env)
 
 	i = 0;
 	env->room_link = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
-	while (i < env->nb_link_line)
+	while (i < env->nb_rooms_line)
 	{
+		env->room_link[i] = (char *)ft_memalloc(sizeof(char ) * 1000);
+		ft_strcat(env->room_link[i], env->room_only[i]);
 		j = 0;
 		room = ft_strdup(env->room_only[i]);
 		while (j < env->nb_link_line)
 		{
 			link = ft_strsplit(env->link[j], '-');
-			ft_fprintf(1, YELLOW"room = %s\n"END, room);
-			ft_fprintf(1, ORANGE"link[0] = %s\n"END, link[0]);
 			if (ft_strcmp(room, link[0]) == 0)
 			{
-				if (check_if_room_is_stocked(env->room_only[i], link[1], room) == true)
-				{
-					ft_strcat(env->room_only[i], ",");
-					ft_strcat(env->room_only[i], link[1]);
-				}
+				ft_strcat(env->room_link[i], ",");
+				ft_strcat(env->room_link[i], link[1]);
 			}
 			else if (ft_strcmp(room, link[1]) == 0)
 			{
-				if (check_if_room_is_stocked(env->room_only[i], link[0], room) == true)
-				{
-					ft_strcat(env->room_only[i], ",");
-					ft_strcat(env->room_only[i], link[0]);
-				}
+				ft_strcat(env->room_link[i], ",");
+				ft_strcat(env->room_link[i], link[0]);
 			}
 			++j;
 			ft_2d_tab_free(link, 3);
 		}
-		ft_fprintf(1, CYAN"%s\n"END, env->room_only[i]);
+		/*ft_fprintf(1, CYAN"%s\n"END, env->room_link[i]);*/
 		++i;
 	}
 }
