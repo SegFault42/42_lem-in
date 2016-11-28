@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 18:54:55 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/19 22:17:12 by rabougue         ###   ########.fr       */
+/*   Created: 2015/11/25 21:53:58 by rabougue          #+#    #+#             */
+/*   Updated: 2016/09/15 12:38:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+char	*ft_strcdup(const char *s1, char c)
 {
-	if (s != NULL)
-		write(fd, s, ft_strlen(s));
+	int		i;
+	int		j;
+	char	*dst;
+
+	i = 0;
+	j = ft_strclen(s1, ' ');
+	dst = (char *)malloc(sizeof(dst) * (j + 1));
+	if (dst == NULL)
+		return (NULL);
+	while (s1[i] != c)
+	{
+		if (s1[i] == '\0')
+			break ;
+		dst[i] = s1[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

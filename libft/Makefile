@@ -10,7 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-RED = \033[38;5;9m
+RED = \033[48;5;9m
+GREEN = \033[48;5;10m
+LOL = \033[48;5;106m
+LIL = \033[48;5;129m
 END = \033[0m
 X = 0
 Y = 0
@@ -38,7 +41,8 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
 	  $(PRE)ft_fprintf.c $(PRE)percent_c.c \
 	  $(PRE)percent_d.c $(PRE)percent_s.c \
 	  $(PRE)tools.c \
-	  ft_print_2d_tab.c ft_check_int_overflow.c ft_count_char.c ft_strccmp.c
+	  ft_print_2d_tab.c ft_check_int_overflow.c ft_count_char.c ft_strccmp.c \
+	  ft_strcdup.c ft_strclen.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -56,9 +60,13 @@ $(NAME): $(OBJS) ./includes/libft.h
 	@ranlib $(NAME)
 
 %.o : %.c $(HEAD)
-	@$(eval X=$(shell echo $$(($(X)+1))))
-	#@$(eval Y=$(shell echo $$(($(Y)+1))))
-	@echo "\x1b[0;$(X)H#"
+	@$(eval X=$(shell echo $$(($(X)+100))))
+	@$(eval Y=$(shell echo $$(($(Y)+1))))
+	@echo "\x1b[$(X);$(X)H#"
+	@echo "$(RED)"
+	@echo "$(GREEN)"
+	@echo "$(LOL)"
+	@echo "$(LIL)"
 	@echo "\x1b[0;0H["
 	@echo "\x1b[0;88H]"
 	@$(CC) -c $(FLAG) $< -o $@

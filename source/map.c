@@ -46,10 +46,11 @@ void	save_map(t_env *env)
 {
 	char	*line;
 	int		i;
+	int		ret = 0;
 
 	line = NULL;
 	i = 1;
-	while (get_next_line(STDIN_FILENO, &line) > 0)
+	while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
 	{
 		check_error_gnl(&line);
 		alloc_tab(env, line, i);

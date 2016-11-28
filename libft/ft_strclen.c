@@ -14,10 +14,14 @@
 
 size_t	ft_strclen(const char *s, char c)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != c)
+	{
+		if (s[i] == '\0')
+			return (i);
 		i++;
+	}
 	return (i);
 }
