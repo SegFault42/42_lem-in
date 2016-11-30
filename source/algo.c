@@ -12,94 +12,109 @@
 
 #include "common.h"
 
-int8_t	check_if_path_ok(char **split, char **path, t_env *env, int k)
+int8_t	check_if_start_found(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->nb_rooms_line)
+	{
+		while (env->path[i] == NULL)
+			++i;
+		if (ft_strccmp(env->path[i], env->start, ' ') == 0)
+			return (true);
+		++i;
+	}
+	return (false);
+}
+
+int8_t	check_if_room_is_already_stored(t_env *env, int iter)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->nb_rooms_line)
+	{
+		while (env->path[i] == NULL)
+			++i;
+		ft_fprintf(1, GREEN"env->path[i] = %s | env->room_link[iter] = %s\n"END, env->path[i], env->room_link[iter]);
+		if (ft_strcmp(env->path[i], env->split_path[iter]) == 0)
+			return (true);
+		++i;
+	}
+	return (false);
+}
+//================================Temp_function================================
+
+void	print_path(t_env *env)
+{
+	for(int a = 0; a < env->nb_rooms_line; ++a)
+		ft_fprintf(1, "%s\n", env->path[a]);
+}
+
+void	print_room_link(t_env *env)
+{
+	ft_fprintf(1, YELLOW"===========Room_link=============\n"END);
+	for(int a = 0; a < env->nb_rooms_line; ++a)
+		ft_fprintf(1, YELLOW"%s\n"END, env->room_link[a]);
+	ft_fprintf(1, YELLOW"================END==============\n"END);
+}
+
+//=============================================================================
+
+int8_t	looking_for_connected_room(t_env *env, int iter)
 {
 	int	i;
 	int	j;
 
-	i = env->nb_rooms_line;
+	i = 0;
 	j = 0;
-	while (path[i])
+	while (ft_strccmp(env->path[iter], env->room_link[i], ',') != 0) // browse all room to find path[iter]
+		i++;
+	while (j < env->nb_rooms_line)
 	{
-		ft_fprintf(1, GREEN"%s, %s\n"END, split[k], path[i]);
-		if (ft_strcmp(split[k], path[i]) == 0)
+		while (env->path[j] == NULL)
+			++j;
+		ft_fprintf(1, "env->room_link[i] = %s | env->path[j] = %s\n", env->room_link[i], env->path[j]);
+		if (ft_strccmp(env->path[j], env->room_link[i], ',') == 0)
 		{
+			env->split_path = ft_strsplit(env->room_link[i], ',');
 			return (true);
 		}
-		--i;
+		++j;
 	}
-	(void)split;
-	(void)path;
-	(void)env;
 	return (false);
 }
 
+
 void	looking_for_path(t_env *env)
 {
-	char	**path;
-	char	**split;
-	char	**split_b;
 	int		iter;
-	int		i;
-	int		j;
-	int		k;
+	int	i;
 
-	int l = env->nb_rooms_line -1 ;
-	i = 0;
-	j = 0;
-	k = 1;
+	i = 1;
 	iter = env->nb_rooms_line -1;
-	path = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
-	path[iter] = ft_strcdup(env->end, ' ');
-	while (j < env->nb_rooms_line)
+	env->path = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
+	env->path[iter] = ft_strcdup(env->end, ' ');
+	while (check_if_start_found(env) == false)
 	{
-		split_b = ft_strsplit(env->room_link[j], ',');
-		if (ft_strncmp(split_b[0], env->start, ft_strlen(split_b[0])) == 0)
-			break ;
-		++j;
-	}
-	j = 0;
-	ft_fprintf(1, GREEN"%s\n"END, split_b[0]);
-	while (path[0] == NULL)
-	{
-		split = ft_strsplit(env->room_link[j], ',');
-		ft_fprintf(1, "%s\n", env->room_link[j]);
-		while (split[i])
+		if (looking_for_connected_room(env, iter) == true)
 		{
-			/*if (check_if_path_ok(split, path, env, k) == true)*/
-				/*++k;*/
-			while (path[l])
-			{
-				if (ft_strcmp(path[l], split[k]) == 0)
-					k++;
-				--l;
-			}
-			if (ft_strcmp(split[0], path[iter]) == 0)
-			{
-				iter--;
-				path[iter] = ft_strdup(split[k]);
-				j = -1;
-				k = 1;
-				l = env->nb_rooms_line -1;
-				if (ft_strccmp(path[iter], env->start, ' ') == 0)
-				{
-					for(int a = 0; a < env->nb_rooms_line; ++a)
-						ft_fprintf(1, PURPLE"%s\n"END, path[a]);
-					return ;
-				}
-			}
-			i++;
+			while (check_if_room_is_already_stored(env, i) == true)
+				i++;
+			--iter;
+			env->path[iter] = ft_strdup(env->split_path[i]);
 		}
-		/*ft_2d_tab_free(split, len_tab);*/
-		++j;
-		i = 0;
+		print_path(env);
+		i = 1;
 	}
-	/*for(int a = 0; a < env->nb_rooms_line; ++a)*/
-		/*ft_fprintf(1, PURPLE"%s\n"END, path[a]);*/
+	
+	
 }
 
 int8_t	algo(t_env *env)
 {
+	print_room_link(env);
 	/*count_nb_link_by_room(env);*/
 	/*stock_info_room(env);*/
 	looking_for_path(env);

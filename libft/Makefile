@@ -60,15 +60,15 @@ $(NAME): $(OBJS) ./includes/libft.h
 	@ranlib $(NAME)
 
 %.o : %.c $(HEAD)
-	@$(eval X=$(shell echo $$(($(X)+100))))
+	@$(eval X=$(shell echo $$(($(X)+1))))
 	@$(eval Y=$(shell echo $$(($(Y)+1))))
-	@echo "\x1b[$(X);$(X)H#"
-	@echo "$(RED)"
-	@echo "$(GREEN)"
-	@echo "$(LOL)"
-	@echo "$(LIL)"
-	@echo "\x1b[0;0H["
-	@echo "\x1b[0;88H]"
+	@echo "\x1b[$(X);0H                                                                                                        "
+	@echo "\x1b[48;5;$(X)m"
+	#@echo "$(GREEN)"
+	#@echo "$(LOL)"
+	#@echo "$(LIL)"
+	#@echo "\x1b[0;0H["
+	#@echo "\x1b[0;88H]"
 	@$(CC) -c $(FLAG) $< -o $@
 
 mc: fclean all clean

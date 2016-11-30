@@ -18,20 +18,20 @@ int	ft_strccmp(const char *s1, const char *s2, char c)
 	int				j;
 	unsigned char	*ss1;
 	unsigned char	*ss2;
+	char			*tmp;
 
 	ss1 = (unsigned char *)s1;
 	ss2 = (unsigned char *)s2;
 	i = 0;
 	j = 0;
-	while (s2[j] != c)
-		++j;
-	++j;
+	tmp	= ft_strcdup(s2, c);
 	while (ss1[i] != '\0')
 	{
-		if (ss2[j] != ss1[i])
-			return (ss1[i] - ss2[j]);
+		if (tmp[j] != ss1[i])
+			return (ss1[i] - tmp[j]);
 		i++;
 		j++;
 	}
+	free(tmp);
 	return (0);
 }

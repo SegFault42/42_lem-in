@@ -97,6 +97,7 @@ void	stock_link_with_room(t_env *env)
 			++j;
 			ft_2d_tab_free(link, 3);
 		}
+		free(room);
 		/*ft_fprintf(1, CYAN"%s\n"END, env->room_link[i]);*/
 		++i;
 	}

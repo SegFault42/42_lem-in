@@ -43,6 +43,8 @@ typedef struct			s_env
 	char				**link; // all link stored here
 	char				**room_link; // all room with link for algo
 	char				**room_only;
+	char				**path;
+	char				**split_path;
 
 	int					nb_lines_map; // nb line of all map
 	int					nb_rooms_line; // nb room_line only
