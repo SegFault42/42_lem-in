@@ -31,8 +31,9 @@ int8_t	get_start_and_end(t_env *env)
 	int	i;
 
 	i = 0;
-	while (i < env->nb_lines_map)
+	while (i < env->nb_lines_map + env->nb_cmt_line)
 	{
+		ft_fprintf(1, GREEN"%s\n"END, env->map[i]);
 		if (ft_strcmp(env->map[i], "##start") == 0)
 			env->start = ft_strdup(env->map[++i]);
 		else if (ft_strcmp(env->map[i], "##end") == 0)

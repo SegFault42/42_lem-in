@@ -23,7 +23,14 @@ int8_t	check_if_start_and_and_are_connected(t_env *env)
 	start = ft_strcdup(env->start, ' ');
 	end = ft_strcdup(env->end, ' ');
 	while (ft_strccmp(start, env->room_link[i], ',') != 0)
+	{
 		i++;
+		if (i >= env->nb_rooms_line)
+		{
+			ft_fprintf(1, "Error\n"); // Error for unicode
+			exit(1);
+		}
+	}
 	split = ft_strsplit(env->room_link[i], ',');
 	i = 0;
 	while (split[i])
