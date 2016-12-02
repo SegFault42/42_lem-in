@@ -19,15 +19,16 @@ int	main(int argc, char **argv)
 
 	ret = 0;
 	memset(&env, 0, sizeof(env));
-	if (argc == 1)
-		save_map(&env);
-	/*else if (argc == 2)*/
-		/*parsing_map_file(&env);*/
+	if (argc > 1)
+	{
+		ft_fprintf(1, "Error\n");
+		exit(EXIT_FAILURE);
+	}
+	save_map(&env);
 	ret = parsing_map_stdin(&env);
 	if (ret >= EXIT_ERROR_LINK && ret <= EXIT_ERROR_CMD)
 		print_error(env.map, env.nb_lines_map, ret);
 	get_start_and_end(&env);
-	/*ft_fprintf(1, "start = %s, end = %s\n", env.start, env.end);*/
 	algo(&env);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;

@@ -15,28 +15,17 @@
 void	get_room_only(t_env *env)
 {
 	int	i;
-	int	len;
 	char **tmp;
 
 	i = 0;
-	len = 0;
-	tmp = (char **)ft_memalloc(sizeof(char *));
 	env->room_only = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
 	while (i < env->nb_rooms_line)
 	{
-		len += ft_strlen(env->room[i]);
-		++i;
-	}
-	len += i;
-	i = 0;
-	while (i < env->nb_rooms_line)
-	{
-		env->room_only[i] = (char *)ft_memalloc(sizeof(char) * (env->nb_rooms_line * len));
+		env->room_only[i] = (char *)ft_memalloc(sizeof(char) * (ft_strclen(env->room[i], ' ')));
 		tmp = ft_strsplit(env->room[i], ' ');
 		ft_strcpy(env->room_only[i], tmp[0]);
-		/*ft_fprintf(1, PURPLE"%s\n"END, env->room_only[i]);*/
+		ft_2d_tab_free(tmp, ft_count_2d_tab(tmp));
 		++i;
-		free(tmp[0]);
 	}
 }
 

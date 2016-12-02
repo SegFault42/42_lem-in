@@ -46,10 +46,11 @@ void	save_map(t_env *env)
 {
 	char	*line;
 	int		i;
-	int		ret = 0;
+	int		ret;
 
 	line = NULL;
 	i = 1;
+	ret = 0;
 	while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
 	{
 		check_error_gnl(&line);
@@ -58,7 +59,7 @@ void	save_map(t_env *env)
 		free(line);
 	}
 	env->nb_lines_map = i - 1; // Why -1 ? because i is instancied at 1
-	if (env->nb_lines_map == 1)
+	if (env->nb_lines_map == 1 || env->nb_lines_map == 0)
 	{
 		ft_fprintf(2, RED"ERROR\n"END);
 		exit(EXIT_FAILURE);
