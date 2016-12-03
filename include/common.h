@@ -106,5 +106,6 @@ int8_t					algo(t_env *env);
 int8_t					get_start_and_end(t_env *env);
 void					get_room_only(t_env *env);
 void					stock_link_with_room(t_env *env);
+void					print_ants(t_env *env);
 
 #endif

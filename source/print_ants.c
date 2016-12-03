@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,45 @@
 
 #include "common.h"
 
-int	main(int argc, char **argv)
+int	count_max_ants(t_env *env)
 {
-	t_env	env;
-	int8_t	ret;
+	int	i;
 
-	ret = 0;
-	memset(&env, 0, sizeof(env));
-	if (argc > 1)
-	{
-		ft_fprintf(1, "Error\n");
-		exit(EXIT_FAILURE);
-	}
-	save_map(&env);
-	ret = parsing_map_stdin(&env);
-	if (ret >= EXIT_ERROR_LINK && ret <= EXIT_ERROR_CMD)
-		print_error(env.map, env.nb_lines_map, ret);
-	get_start_and_end(&env);
-	algo(&env);
-	print_ants(&env);
-	ft_2d_tab_free(env.map, env.nb_lines_map);
-	(void)argc;
-	(void)argv;
+	i = 0;
+	while (env->path[i] == NULL)
+		++i;
+	return (env->nb_rooms_line - i);
 }
+
+void	print_ants(t_env *env)
+{
+	int	nb_ants;
+	int	path;
+	int	save_path;
+	int	ants;
+	int	save_ants;
+	/*int	max_ants;*/
+
+	ants = 1;
+	save_ants = 1;
+	nb_ants = count_max_ants(env);
+	save_path = env->nb_rooms_line - nb_ants;
+	path = save_path;
+	while (ants < env->nb_ants)
+	{
+		while (ants != 0)
+		{
+			ft_fprintf(1, "L%d-%s ", ants, env->path[path]);
+			--path;
+			--ants;
+		}
+		RC;
+		if (save_ants < nb_ants)
+			ants = ++save_ants;
+		else if (save_ants == nb_ants)
+			ants = save_ants;
+		sleep(2);
+		path = ++save_path;
+	}
+}
+
