@@ -31,12 +31,9 @@ void	alloc_tab(t_env *env, char *line, int size)
 		ft_2d_tab_free(env->map, size -1);
 		env->map = (char **)malloc(sizeof(char *) * size);
 	}
-	i = 0;
-	while (i < size -1)
-	{
+	i = -1;
+	while (++i < size -1)
 		env->map[i] = ft_strdup(tmp[i]);
-		++i;
-	}
 	if (i < size)
 		env->map[i] = ft_strdup(line);
 	ft_2d_tab_free(tmp, size -1);
@@ -58,7 +55,7 @@ void	save_map(t_env *env)
 		i++;
 		free(line);
 	}
-	env->nb_lines_map = i - 1; // Why -1 ? because i is instancied at 1
+	env->nb_lines_map = i - 1;
 	if (env->nb_lines_map == 1 || env->nb_lines_map == 0)
 	{
 		ft_fprintf(2, RED"ERROR\n"END);

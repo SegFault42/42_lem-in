@@ -26,10 +26,7 @@ int8_t	check_if_start_and_and_are_connected(t_env *env)
 	{
 		i++;
 		if (i >= env->nb_rooms_line)
-		{
-			ft_fprintf(1, "Error\n"); // Error for unicode
-			exit(1);
-		}
+			print_simple_error();
 	}
 	split = ft_strsplit(env->room_link[i], ',');
 	i = 0;
@@ -111,20 +108,16 @@ int8_t	looking_for_connected_room(t_env *env, int iter)
 
 	i = 0;
 	j = 0;
-	while (ft_strccmp(env->path[iter], env->room_link[i], ',') != 0) // browse all room to find path[iter]
+	while (ft_strccmp(env->path[iter], env->room_link[i], ',') != 0)
 	{
 		i++;
 		if (env->room_link[i] == NULL)
-		{
-			ft_fprintf(2, RED"Error\n"END);
-			exit(EXIT_FAILURE);
-		}
+			print_simple_error();
 	}
 	while (j < env->nb_rooms_line)
 	{
 		while (env->path[j] == NULL)
 			++j;
-		ft_fprintf(1, "env->room_link[i] = %s | env->path[j] = %s\n", env->room_link[i], env->path[j]);
 		if (ft_strccmp(env->path[j], env->room_link[i], ',') == 0)
 		{
 			env->split_path = ft_strsplit(env->room_link[i], ',');
@@ -140,7 +133,6 @@ void	looking_for_path(t_env *env)
 	int		iter;
 	int		i;
 
-	i = 1;
 	iter = env->nb_rooms_line -1;
 	env->path = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
 	env->path[iter] = ft_strcdup(env->end, ' ');
@@ -152,6 +144,7 @@ void	looking_for_path(t_env *env)
 	}
 	while (check_if_start_found(env) == false)
 	{
+		i = 1;
 		if (looking_for_connected_room(env, iter) == true)
 		{
 			while (check_if_room_is_already_stored(env, i) == true)
@@ -160,8 +153,6 @@ void	looking_for_path(t_env *env)
 			env->path[iter] = ft_strdup(env->split_path[i]);
 			ft_2d_tab_free(env->split_path, ft_count_2d_tab(env->split_path));
 		}
-		/*print_path(env);*/
-		i = 1;
 	}
 }
 
