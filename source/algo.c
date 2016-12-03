@@ -160,7 +160,7 @@ void	looking_for_path(t_env *env)
 			env->path[iter] = ft_strdup(env->split_path[i]);
 			ft_2d_tab_free(env->split_path, ft_count_2d_tab(env->split_path));
 		}
-		print_path(env);
+		/*print_path(env);*/
 		i = 1;
 	}
 }
