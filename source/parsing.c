@@ -17,40 +17,46 @@
 #define CMD_ITER	2
 #define CMT_ITER	3
 
+int8_t	count_all_2(t_env *env, int *i)
+{
+	if (ft_strstr(env->map[*i], "-") != NULL && env->map[*i][0] != '#')
+	{
+		if (ft_strchr(env->map[*i], ' ') != NULL)
+			return (EXIT_ERROR_ROOM);
+		env->index_map[*i] = LINK;
+		++*i;
+		++env->nb_link_line;
+		return (true);
+	}
+	else if (check_if_is_command(env->map[*i]) == EXIT_SUCCESS)
+	{
+		env->index_map[*i] = CMD;
+		++*i;
+		++env->nb_cmd_line;
+		return (true);
+	}
+	else if (check_if_is_comment(env->map[*i]) == EXIT_SUCCESS)
+	{
+		env->index_map[*i] = CMT;
+		++*i;
+		++env->nb_cmt_line;
+		return (true);
+	}
+	return (false);
+}
+
 int8_t	count_all(t_env *env)
 {
 	int		i;
 	int8_t	ret_check_room;
 
 	i = 1;
-	env->index_map = (int *)ft_memalloc(sizeof(int) * env->nb_lines_map); // dont't forget to free !*/
+	env->index_map = (int *)ft_memalloc(sizeof(int) * env->nb_lines_map);
 	env->index_map[0] = ANTS;
-	ft_fprintf(1, CYAN"%d\n"END, env->nb_ants);
 	while (i < env->nb_lines_map)
 	{
-		if (ft_strstr(env->map[i], "-") != NULL && env->map[i][0] != '#') // exit function when a line link found
-		{
-			if (ft_strchr(env->map[i], ' ') != NULL)
-				return (EXIT_ERROR_ROOM);
-			env->index_map[i] = LINK;
-			++i;
-			++env->nb_link_line;
+		if (count_all_2(env, &i) == true)
 			continue ;
-		}
-		else if (check_if_is_command(env->map[i]) == EXIT_SUCCESS)
-		{
-			env->index_map[i] = CMD;
-			++i;
-			++env->nb_cmd_line;
-			continue ;
-		}
-		else if (check_if_is_comment(env->map[i]) == EXIT_SUCCESS)
-		{
-			env->index_map[i] = CMT;
-			++i;
-			++env->nb_cmt_line;
-			continue ;
-		}
 		ret_check_room = check_room_valid(env->map[i]);
 		if (ret_check_room == EXIT_ERROR_ROOM)
 			return (EXIT_ERROR_ROOM);
@@ -75,6 +81,7 @@ int8_t	parsing_map_stdin(t_env *env)
 	if (check_ants_valid(env) == EXIT_FAILURE)
 		return (EXIT_ERROR_ANTS);
 	error = count_all(env);
+	ft_fprintf(1, CYAN"%d\n"END, env->nb_ants);
 	if (error == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
 	else if (error == EXIT_ERROR_ROOM)
@@ -86,11 +93,33 @@ int8_t	parsing_map_stdin(t_env *env)
 	if (parsing_link(env) == EXIT_ERROR_LINK)
 		return (EXIT_ERROR_LINK);
 	error = get_start_and_end(env);
-	if (error == EXIT_ERROR_ROOM || error == EXIT_ERROR_CMD) // because used first for ROOM
+	if (error == EXIT_ERROR_ROOM || error == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
 	get_room_only(env);
 	stock_link_with_room(env);
 	return (EXIT_SUCCESS);
+}
+
+void	fill_room_link_cmt_cmd_2(t_env *env, int *iter, int i)
+{
+	if (env->index_map[i] == LINK)
+	{
+		env->link[iter[LINK_ITER]] = ft_strdup(env->map[i]);
+		ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[LINK_ITER]]);
+		++iter[LINK_ITER];
+	}
+	else if (env->index_map[i] == CMD)
+	{
+		env->cmd[iter[CMD_ITER]] = ft_strdup(env->map[i]);
+		ft_fprintf(1, RED"%s\n"END, env->cmd[iter[CMD_ITER]]);
+		++iter[CMD_ITER];
+	}
+	else if (env->index_map[i] == CMT)
+	{
+		env->cmt[iter[CMT_ITER]] = ft_strdup(env->map[i]);
+		ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[CMT_ITER]]);
+		++iter[CMT_ITER];
+	}
 }
 
 int8_t	fill_room_link_cmt_cmd(t_env *env)
@@ -108,24 +137,8 @@ int8_t	fill_room_link_cmt_cmd(t_env *env)
 			ft_fprintf(1, YELLOW"%s\n"END, env->room[iter[ROOM_ITER]]);
 			++iter[ROOM_ITER];
 		}
-		else if (env->index_map[i] == LINK)
-		{
-			env->link[iter[LINK_ITER]] = ft_strdup(env->map[i]);
-			ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[LINK_ITER]]);
-			++iter[LINK_ITER];
-		}
-		else if (env->index_map[i] == CMD)
-		{
-			env->cmd[iter[CMD_ITER]] = ft_strdup(env->map[i]);
-			ft_fprintf(1, RED"%s\n"END, env->cmd[iter[CMD_ITER]]);
-			++iter[CMD_ITER];
-		}
-		else if (env->index_map[i] == CMT)
-		{
-			env->cmt[iter[CMT_ITER]] = ft_strdup(env->map[i]);
-			ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[CMT_ITER]]);
-			++iter[CMT_ITER];
-		}
+		else
+			fill_room_link_cmt_cmd_2(env, iter, i);
 		++i;
 	}
 	if (ft_strstr(env->cmd[0], env->cmd[1]) != NULL)
@@ -146,7 +159,7 @@ int8_t	alloc_room_link_cmt_cmd(t_env *env)
 
 int8_t	stock_all(t_env *env)
 {
-	if (alloc_room_link_cmt_cmd(env) == EXIT_ERROR_CMD) // don't forget to free all !
+	if (alloc_room_link_cmt_cmd(env) == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);
 }
