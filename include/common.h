@@ -55,6 +55,7 @@ typedef struct			s_env
 	int					link_line;
 	char				*start;
 	char				*end;
+	char				**link_two;
 }						t_env;
 /*
 ** parsing.c

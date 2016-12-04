@@ -21,7 +21,8 @@ void	get_room_only(t_env *env)
 	env->room_only = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
 	while (i < env->nb_rooms_line)
 	{
-		env->room_only[i] = (char *)ft_memalloc(sizeof(char) * (ft_strclen(env->room[i], ' ')));
+		env->room_only[i] = (char *)ft_memalloc(sizeof(char) *
+		(ft_strclen(env->room[i], ' ')));
 		tmp = ft_strsplit(env->room[i], ' ');
 		ft_strcpy(env->room_only[i], tmp[0]);
 		ft_2d_tab_free(tmp, ft_count_2d_tab(tmp));
@@ -55,12 +56,36 @@ int8_t	check_if_room_is_stocked(char *room_link, char *link)
 	(void)room_link;
 }
 
+void	stock_link_with_room_2(t_env *env, int *i)
+{
+	int	j;
+	char	*room;
+	char	**link;
+
+	j = 0;
+	room = ft_strdup(env->room_only[*i]);
+	while (j < env->nb_link_line)
+	{
+		link = ft_strsplit(env->link[j], '-');
+		if (ft_strcmp(room, link[0]) == 0)
+		{
+			ft_strcat(env->room_link[*i], ",");
+			ft_strcat(env->room_link[*i], link[1]);
+		}
+		else if (ft_strcmp(room, link[1]) == 0)
+		{
+			ft_strcat(env->room_link[*i], ",");
+			ft_strcat(env->room_link[*i], link[0]);
+		}
+		++j;
+		ft_2d_tab_free(link, 3);
+	}
+	free(room);
+}
+
 void	stock_link_with_room(t_env *env)
 {
 	int	i;
-	int	j;
-	char	**link;
-	char	*room;
 
 	i = 0;
 	env->room_link = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
@@ -68,90 +93,7 @@ void	stock_link_with_room(t_env *env)
 	{
 		env->room_link[i] = (char *)ft_memalloc(sizeof(char ) * 1000);
 		ft_strcat(env->room_link[i], env->room_only[i]);
-		j = 0;
-		room = ft_strdup(env->room_only[i]);
-		while (j < env->nb_link_line)
-		{
-			link = ft_strsplit(env->link[j], '-');
-			if (ft_strcmp(room, link[0]) == 0)
-			{
-				ft_strcat(env->room_link[i], ",");
-				ft_strcat(env->room_link[i], link[1]);
-			}
-			else if (ft_strcmp(room, link[1]) == 0)
-			{
-				ft_strcat(env->room_link[i], ",");
-				ft_strcat(env->room_link[i], link[0]);
-			}
-			++j;
-			ft_2d_tab_free(link, 3);
-		}
-		free(room);
-		/*ft_fprintf(1, CYAN"%s\n"END, env->room_link[i]);*/
+		stock_link_with_room_2(env, &i);
 		++i;
 	}
-}
-
-int8_t	check_forbidden_charactere(char *line)
-{
-	if (line[0] == '#' || line[0] == 'L') // forbidden charactere
-		return (EXIT_ERROR_ROOM);
-	return (EXIT_SUCCESS);
-}
-
-int8_t	check_split_line(char *line)
-{
-	char	**split;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	split = ft_strsplit(line, ' ');
-	i = ft_count_2d_tab(split);
-	if (i != 3)
-	{
-		ft_2d_tab_free(split, i);
-		return (EXIT_ERROR_ROOM);
-	}
-	ft_2d_tab_free(split, i);
-	return (EXIT_SUCCESS);
-}
-
-int8_t	check_nb_room(t_env *env)
-{
-	if (env->nb_rooms_line == 0)
-		return (EXIT_ERROR_ROOM);
-	return (EXIT_SUCCESS);
-}
-
-int8_t	check_room_valid(char *line)
-{
-	if (check_forbidden_charactere(line) == EXIT_ERROR_ROOM)
-		return (EXIT_ERROR_ROOM);
-	if (check_split_line(line) == EXIT_ERROR_ROOM)
-		return (EXIT_ERROR_ROOM);
-	return (EXIT_SUCCESS);
-}
-
-int8_t	check_multiple_same_rooms(t_env *env)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < env->nb_rooms_line)
-	{
-		j++;
-		while (j < env->nb_rooms_line)
-		{
-			if (ft_strcmp(env->room[i], env->room[j]) == 0)
-				return (EXIT_ERROR_ROOM);
-			++j;
-		}
-		++i;
-		j = i;
-	}
-	return (EXIT_SUCCESS);
 }

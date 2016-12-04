@@ -26,6 +26,7 @@ SRCS = $(SRC)/main.c \
 	   $(SRC)/parsing.c \
 	   $(SRC)/parsing_ants.c \
 	   $(SRC)/parsing_room.c \
+	   $(SRC)/parsing_room_2.c \
 	   $(SRC)/parsing_command.c \
 	   $(SRC)/parsing_comment.c \
 	   $(SRC)/parsing_link.c \

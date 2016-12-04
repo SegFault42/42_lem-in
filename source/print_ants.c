@@ -12,6 +12,20 @@
 
 #include "common.h"
 
+void	print_ants_2(t_env *env, int *i, int *nb_ants, int save_i)
+{
+	while (*nb_ants <= env->nb_ants)
+	{
+		while (*i < env->nb_rooms_line)
+		{
+			ft_fprintf(1, "L%d-%s\n", *nb_ants, env->path[*i]);
+			++*i;
+		}
+		*i = save_i;
+		++*nb_ants;
+	}
+}
+
 void	print_ants(t_env *env)
 {
 	int	i;
@@ -33,14 +47,5 @@ void	print_ants(t_env *env)
 		++i;
 	}
 	i = save_i;
-	while (nb_ants <= env->nb_ants)
-	{
-		while (i < env->nb_rooms_line)
-		{
-			ft_fprintf(1, "L%d-%s\n", nb_ants, env->path[i]);
-			++i;
-		}
-		i = save_i;
-		++nb_ants;
-	}
+	print_ants_2(env, &i, &nb_ants, save_i);
 }

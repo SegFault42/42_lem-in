@@ -14,7 +14,8 @@
 
 int8_t	check_if_is_comment(char *line)
 {
-	if (line[0] == '#' && ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0)
+	if (line[0] == '#' && ft_strcmp(line, "##start") != 0 &&
+	ft_strcmp(line, "##end") != 0)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
