@@ -1,6 +1,6 @@
 3
 ##start
-room0 1 0
+room_0 1 0
 room_1 5 0
 room_2 13 0
 ##end
@@ -8,6 +8,5 @@ room_3 9 0
 room_0-room_1
 room_1-room_2
 room_2-room_3
-room_3-room_2
 #       MAP
 # [room_0]-[room_1]-[room_2]-[room_3]

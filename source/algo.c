@@ -68,7 +68,6 @@ int8_t	check_if_room_is_already_stored(t_env *env, int iter)
 	int	i;
 
 	i = 0;
-	ft_debug();
 	while (i < env->nb_rooms_line)
 	{
 		while (env->path[i] == NULL)
@@ -161,15 +160,40 @@ void	check_if_room_exist(t_env *env)
 {
 	int	i;
 	int	j;
+	int	iter = 0;
 
 	i = 0;
 	j = 0;
-	while (i < env->nb_rooms_line)
+	char	**split;
+	char	**link_only;
+
+	link_only = (char **)ft_memalloc(sizeof(char *) * (env->nb_link_line * 2));
+	split = NULL;
+	while (i < env->nb_link_line)
 	{
-		while (ft_strccmp(env->room_only[i], env->link[j], '-') != 0)
+		split = ft_strsplit(env->link[i], '-');
+		while (split[iter])
 		{
+			link_only[j] = split[iter];
+			++iter;
 			++j;
-			if (j >= env->nb_link_line)
+		}
+		++i;
+		iter = 0;
+	}
+	i = 0;
+	j = 0;
+	/*for (int a = 0; a < env->nb_link_line * 2; ++a)*/
+		/*ft_fprintf(1, "%s\n", link_only[a]);*/
+	while (i < env->nb_link_line * 2)
+	{
+		while (j < env->nb_rooms_line)
+		{
+			ft_fprintf(1, "%s, %s\n", link_only[i], env->room_only[j]);
+			if (ft_strccmp(link_only[i], env->room_only[j], ' ') == 0)
+				break ;
+			++j;
+			if (j >= env->nb_rooms_line)
 				print_simple_error();
 		}
 		++i;
@@ -182,7 +206,7 @@ int8_t	algo(t_env *env)
 	/*print_room_link(env);*/
 	/*for(int a = 0; a < env->nb_link_line; a++)*/
 		/*ft_fprintf(1, "%s\n", env->link[a]);*/
-	/*check_if_room_exist(env);*/
+	check_if_room_exist(env);
 	/*for(int a = 0; a < env->nb_link_line; a++)*/
 		/*ft_fprintf(1, YELLOW"%s\n"END, env->link[a]);*/
 	/*for(int b = 0; b < env->nb_rooms_line; b++)*/
