@@ -68,6 +68,7 @@ int8_t	check_if_room_is_already_stored(t_env *env, int iter)
 	int	i;
 
 	i = 0;
+	ft_debug();
 	while (i < env->nb_rooms_line)
 	{
 		while (env->path[i] == NULL)
@@ -156,9 +157,36 @@ void	looking_for_path(t_env *env)
 	}
 }
 
+void	check_if_room_exist(t_env *env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < env->nb_rooms_line)
+	{
+		while (ft_strccmp(env->room_only[i], env->link[j], '-') != 0)
+		{
+			++j;
+			if (j >= env->nb_link_line)
+				print_simple_error();
+		}
+		++i;
+		j = 0;
+	}
+}
+
 int8_t	algo(t_env *env)
 {
-	print_room_link(env);
+	/*print_room_link(env);*/
+	/*for(int a = 0; a < env->nb_link_line; a++)*/
+		/*ft_fprintf(1, "%s\n", env->link[a]);*/
+	/*check_if_room_exist(env);*/
+	/*for(int a = 0; a < env->nb_link_line; a++)*/
+		/*ft_fprintf(1, YELLOW"%s\n"END, env->link[a]);*/
+	/*for(int b = 0; b < env->nb_rooms_line; b++)*/
+		/*ft_fprintf(1, YELLOW"%s\n"END, env->room_only[b]);*/
 	looking_for_path(env);
 	return (EXIT_SUCCESS);
 }

@@ -1,5 +1,4 @@
 10
-##start
 room_1 23 3
 room_2 16 7
 #commentaire
@@ -8,7 +7,6 @@ room_4 16 5
 room_5 9 3
 room_6 1 5
 room_7 4 8
-##end
 room_0 9 5
 room_0-room_4
 room_0-room_6
@@ -23,7 +21,6 @@ room_7-room_6
 room_7-room_2
 room_7-room_4
 room_6-room_5
-#Proteger si start ou end n'ont pas de liason, Proteger si start a un '-' dans le nom de la salle
 #MAP
 #          _________________
 #         |                 |

@@ -56,6 +56,7 @@ typedef struct			s_env
 	char				*start;
 	char				*end;
 	char				**link_two;
+	char				*print_map;
 }						t_env;
 /*
 ** parsing.c
@@ -102,5 +103,7 @@ void					get_room_only(t_env *env);
 void					stock_link_with_room(t_env *env);
 void					print_ants(t_env *env);
 void					print_simple_error();
+int8_t					fill_room_link_cmt_cmd(t_env *env);
+char					*fill_print_map(char *s1, char *s2);
 
 #endif

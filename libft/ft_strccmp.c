@@ -24,7 +24,7 @@ int	ft_strccmp(const char *s1, const char *s2, char c)
 	ss2 = (unsigned char *)s2;
 	i = 0;
 	j = 0;
-	tmp	= ft_strcdup(s2, c);
+	tmp = ft_strcdup(s2, c);
 	while (ss1[i] != '\0')
 	{
 		if (tmp[j] != ss1[i])

@@ -12,6 +12,13 @@
 
 #include "common.h"
 
+char	*fill_print_map(char *s1, char *s2)
+{
+	s1 = ft_strjoin(s1, s2);
+	s1 = ft_strjoin(s1, "\n");
+	return (s1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_env	env;
@@ -30,6 +37,7 @@ int	main(int argc, char **argv)
 		print_error(env.map, env.nb_lines_map, ret);
 	get_start_and_end(&env);
 	algo(&env);
+	ft_fprintf(1, RED"%s\n"END, env.print_map);
 	print_ants(&env);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;

@@ -24,6 +24,7 @@ SRC = ./source
 SRCS = $(SRC)/main.c \
 	   $(SRC)/map.c \
 	   $(SRC)/parsing.c \
+	   $(SRC)/parsing_2.c \
 	   $(SRC)/parsing_ants.c \
 	   $(SRC)/parsing_room.c \
 	   $(SRC)/parsing_room_2.c \

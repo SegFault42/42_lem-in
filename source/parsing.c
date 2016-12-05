@@ -77,11 +77,14 @@ int8_t	count_all(t_env *env)
 int8_t	parsing_map_stdin(t_env *env)
 {
 	int8_t	error;
+	char	*ants;
 
 	if (check_ants_valid(env) == EXIT_FAILURE)
 		return (EXIT_ERROR_ANTS);
 	error = count_all(env);
-	ft_fprintf(1, CYAN"%d\n"END, env->nb_ants);
+	ants = ft_itoa(env->nb_ants);
+	env->print_map = fill_print_map(env->print_map, ants);
+	free(ants);
 	if (error == EXIT_ERROR_CMD)
 		return (EXIT_ERROR_CMD);
 	else if (error == EXIT_ERROR_ROOM)
@@ -105,19 +108,22 @@ void	fill_room_link_cmt_cmd_2(t_env *env, int *iter, int i)
 	if (env->index_map[i] == LINK)
 	{
 		env->link[iter[LINK_ITER]] = ft_strdup(env->map[i]);
-		ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[LINK_ITER]]);
+		/*ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[LINK_ITER]]);*/
+		env->print_map = fill_print_map(env->print_map, env->link[iter[LINK_ITER]]);
 		++iter[LINK_ITER];
 	}
 	else if (env->index_map[i] == CMD)
 	{
 		env->cmd[iter[CMD_ITER]] = ft_strdup(env->map[i]);
-		ft_fprintf(1, RED"%s\n"END, env->cmd[iter[CMD_ITER]]);
+		/*ft_fprintf(1, RED"%s\n"END, env->cmd[iter[CMD_ITER]]);*/
+		env->print_map = fill_print_map(env->print_map, env->cmd[iter[CMD_ITER]]);
 		++iter[CMD_ITER];
 	}
 	else if (env->index_map[i] == CMT)
 	{
 		env->cmt[iter[CMT_ITER]] = ft_strdup(env->map[i]);
-		ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[CMT_ITER]]);
+		/*ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[CMT_ITER]]);*/
+		env->print_map = fill_print_map(env->print_map, env->cmt[iter[CMT_ITER]]);
 		++iter[CMT_ITER];
 	}
 }
@@ -134,7 +140,9 @@ int8_t	fill_room_link_cmt_cmd(t_env *env)
 		if (env->index_map[i] == ROOM)
 		{
 			env->room[iter[ROOM_ITER]] = ft_strdup(env->map[i]);
-			ft_fprintf(1, YELLOW"%s\n"END, env->room[iter[ROOM_ITER]]);
+			env->print_map = fill_print_map(env->print_map,
+			env->room[iter[ROOM_ITER]]);
+			/*ft_fprintf(1, YELLOW"%s\n"END, env->room[iter[ROOM_ITER]]);*/
 			++iter[ROOM_ITER];
 		}
 		else
@@ -145,22 +153,3 @@ int8_t	fill_room_link_cmt_cmd(t_env *env)
 		return (EXIT_ERROR_CMD);
 	return (EXIT_SUCCESS);
 }
-
-int8_t	alloc_room_link_cmt_cmd(t_env *env)
-{
-	env->room = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
-	env->link = (char **)ft_memalloc(sizeof(char *) * env->nb_link_line);
-	env->cmd = (char **)ft_memalloc(sizeof(char *) * env->nb_cmd_line);
-	env->cmt = (char **)ft_memalloc(sizeof(char *) * env->nb_cmt_line);
-	if (fill_room_link_cmt_cmd(env) == EXIT_ERROR_CMD)
-		return (EXIT_ERROR_CMD);
-	return (EXIT_SUCCESS);
-}
-
-int8_t	stock_all(t_env *env)
-{
-	if (alloc_room_link_cmt_cmd(env) == EXIT_ERROR_CMD)
-		return (EXIT_ERROR_CMD);
-	return (EXIT_SUCCESS);
-}
-
