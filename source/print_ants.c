@@ -31,19 +31,19 @@ void	print_ants(t_env *env)
 	int	i;
 	int	save_i;
 	int	nb_ants;
-	int	save_simultanous_ants;
+	/*int	save_simultanous_ants;*/
 	int	simultanous_ants;
 
 	i = 0;
 	nb_ants = 1;
 	simultanous_ants = 0;
-	save_simultanous_ants = 0;
+	/*save_simultanous_ants = 0;*/
 	while (env->path[i] == NULL)
 		++i;
 	save_i = i;
 	while (i < env->nb_rooms_line)
 	{
-		++save_simultanous_ants;
+		++env->number_step;
 		++i;
 	}
 	i = save_i;

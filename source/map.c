@@ -39,21 +39,36 @@ void	alloc_tab(t_env *env, char *line, int size)
 	ft_2d_tab_free(tmp, size -1);
 }
 
-void	save_map(t_env *env)
+void	save_map(t_env *env, int option, char *argv)
 {
 	char	*line;
 	int		i;
 	int		ret;
+	int		fd;
 
 	line = NULL;
 	i = 1;
 	ret = 0;
-	while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
+	if (option == 1)
 	{
-		check_error_gnl(&line);
-		alloc_tab(env, line, i);
-		i++;
-		free(line);
+		fd = open(argv, O_RDONLY);
+		while ((ret = get_next_line(fd, &line)) > 0)
+		{
+			check_error_gnl(&line);
+			alloc_tab(env, line, i);
+			i++;
+			free(line);
+		}
+	}
+	else
+	{
+		while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
+		{
+			check_error_gnl(&line);
+			alloc_tab(env, line, i);
+			i++;
+			free(line);
+		}
 	}
 	env->nb_lines_map = i - 1;
 	if (env->nb_lines_map == 1 || env->nb_lines_map == 0)

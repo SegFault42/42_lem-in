@@ -13,9 +13,9 @@
 #include "common.h"
 
 #define ROOM_ITER	0
-#define LINK_ITER	1
-#define CMD_ITER	2
-#define CMT_ITER	3
+#define LINK_		1
+#define CMD_		2
+#define CMT_		3
 
 int8_t	count_all_2(t_env *env, int *i)
 {
@@ -107,24 +107,27 @@ void	fill_room_link_cmt_cmd_2(t_env *env, int *iter, int i)
 {
 	if (env->index_map[i] == LINK)
 	{
-		env->link[iter[LINK_ITER]] = ft_strdup(env->map[i]);
-		/*ft_fprintf(1, ORANGE"%s\n"END, env->link[iter[LINK_ITER]]);*/
-		env->print_map = fill_print_map(env->print_map, env->link[iter[LINK_ITER]]);
-		++iter[LINK_ITER];
+		env->link[iter[LINK_]] = ft_strdup(env->map[i]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[38;5;208m");
+		env->print_map = fill_print_map(env->print_map, env->link[iter[LINK_]]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[0m");
+		++iter[LINK_];
 	}
 	else if (env->index_map[i] == CMD)
 	{
-		env->cmd[iter[CMD_ITER]] = ft_strdup(env->map[i]);
-		/*ft_fprintf(1, RED"%s\n"END, env->cmd[iter[CMD_ITER]]);*/
-		env->print_map = fill_print_map(env->print_map, env->cmd[iter[CMD_ITER]]);
-		++iter[CMD_ITER];
+		env->cmd[iter[CMD_]] = ft_strdup(env->map[i]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[31m");
+		env->print_map = fill_print_map(env->print_map, env->cmd[iter[CMD_]]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[0m");
+		++iter[CMD_];
 	}
 	else if (env->index_map[i] == CMT)
 	{
-		env->cmt[iter[CMT_ITER]] = ft_strdup(env->map[i]);
-		/*ft_fprintf(1, PURPLE"%s\n"END, env->cmt[iter[CMT_ITER]]);*/
-		env->print_map = fill_print_map(env->print_map, env->cmt[iter[CMT_ITER]]);
-		++iter[CMT_ITER];
+		env->cmt[iter[CMT_]] = ft_strdup(env->map[i]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[35;5;208m");
+		env->print_map = fill_print_map(env->print_map, env->cmt[iter[CMT_]]);
+		env->print_map = fill_print_map_nbn(env->print_map, "\e[0m");
+		++iter[CMT_];
 	}
 }
 
@@ -140,9 +143,10 @@ int8_t	fill_room_link_cmt_cmd(t_env *env)
 		if (env->index_map[i] == ROOM)
 		{
 			env->room[iter[ROOM_ITER]] = ft_strdup(env->map[i]);
+			env->print_map = fill_print_map_nbn(env->print_map, "\e[33;5;208m");
 			env->print_map = fill_print_map(env->print_map,
 			env->room[iter[ROOM_ITER]]);
-			/*ft_fprintf(1, YELLOW"%s\n"END, env->room[iter[ROOM_ITER]]);*/
+			env->print_map = fill_print_map_nbn(env->print_map, "\e[0m");
 			++iter[ROOM_ITER];
 		}
 		else

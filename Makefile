@@ -33,6 +33,7 @@ SRCS = $(SRC)/main.c \
 	   $(SRC)/parsing_link.c \
 	   $(SRC)/error.c \
 	   $(SRC)/algo.c \
+	   $(SRC)/algo_2.c \
 	   $(SRC)/print_ants.c \
 
 INCLUDE = -I ./include/ -I ./libft/includes/

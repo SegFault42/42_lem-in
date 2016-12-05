@@ -57,6 +57,7 @@ typedef struct			s_env
 	char				*end;
 	char				**link_two;
 	char				*print_map;
+	int					number_step;
 }						t_env;
 /*
 ** parsing.c
@@ -67,7 +68,7 @@ int8_t					check_multiple_same_rooms(t_env *env);
 ** map.c
 */
 void					alloc_tab(t_env *env, char *line, int size);
-void					save_map(t_env *env);
+void					save_map(t_env *env, int option, char *argv);
 /*
 ** parsing_ants.c
 */
@@ -105,5 +106,8 @@ void					print_ants(t_env *env);
 void					print_simple_error();
 int8_t					fill_room_link_cmt_cmd(t_env *env);
 char					*fill_print_map(char *s1, char *s2);
+char					*fill_print_map_nbn(char *s1, char *s2);
+void					check_if_room_exist(t_env *env);
+int8_t					check_if_start_and_and_are_connected(t_env *env);
 
 #endif
