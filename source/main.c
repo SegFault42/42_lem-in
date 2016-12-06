@@ -25,7 +25,7 @@ char	*fill_print_map_nbn(char *s1, char *s2)
 	return (s1);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_env	env;
 	int8_t	ret;
@@ -34,11 +34,6 @@ int	main(int argc, char **argv)
 	ret = 0;
 	option = 0;
 	memset(&env, 0, sizeof(env));
-	/*if (argc > 1)*/
-	/*{*/
-		/*ft_fprintf(1, RED"Error\n"END);*/
-		/*exit(EXIT_FAILURE);*/
-	/*}*/
 	if (argv[1] != NULL && (ft_strcmp(argv[1], "-fs") == 0 ||
 	ft_strcmp(argv[1], "-f") == 0))
 		option = 1;
@@ -52,8 +47,9 @@ int	main(int argc, char **argv)
 	print_ants(&env);
 	if (argv[1] != NULL && (ft_strcmp(argv[1], "-fs") == 0 ||
 	ft_strcmp(argv[1], "-s") == 0))
-		ft_fprintf(1, "Les fourmis on parcourue %d salle pour atteindre la salle finale", env.number_step);
+		ft_fprintf(1,
+		"\nLes fourmis on parcourue %d salles pour atteindre la salle finale\n",
+		env.number_step);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
 	(void)argc;
-	(void)argv;
 }

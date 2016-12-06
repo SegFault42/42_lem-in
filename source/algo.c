@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/23 15:00:29 by rabougue          #+#    #+#             */
-/*   Updated: Mon Nov 28 22:45:27 2016                                        */
+/*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
+/*   Updated: 2016/11/23 19:45:48 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	looking_for_path(t_env *env)
 	int		iter;
 	int		i;
 
-	iter = env->nb_rooms_line -1;
+	iter = env->nb_rooms_line - 1;
 	env->path = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
 	env->path[iter] = ft_strcdup(env->end, ' ');
 	if (check_if_start_and_and_are_connected(env) == true)

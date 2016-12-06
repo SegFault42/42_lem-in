@@ -12,7 +12,6 @@
 
 #include "common.h"
 
-
 int8_t	alloc_room_link_cmt_cmd(t_env *env)
 {
 	env->room = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);

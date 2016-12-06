@@ -24,9 +24,9 @@ int8_t	check_ants_valid(t_env *env)
 	while (env->map[0][i] != '\0')
 	{
 		if (ft_isdigit(env->map[0][i]) == false)
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		++i;
 	}
 	env->nb_ants = overflow;
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

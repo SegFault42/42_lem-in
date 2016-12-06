@@ -14,8 +14,8 @@
 
 void	get_room_only(t_env *env)
 {
-	int	i;
-	char **tmp;
+	int		i;
+	char	**tmp;
 
 	i = 0;
 	env->room_only = (char **)ft_memalloc(sizeof(char *) * env->nb_rooms_line);
@@ -30,16 +30,16 @@ void	get_room_only(t_env *env)
 	}
 }
 
-int8_t	check_if_room_is_stocked(char *room_link, char *link)
+int8_t	check_if_room_is_stocked(char *room_link)
 {
 	char	**split;
 	int		i;
 	int		j;
 
 	j = 0;
-		i = 0;
+	i = 0;
 	split = ft_strsplit(room_link, ',');
-	while(split[i])
+	while (split[i])
 	{
 		j = 0;
 		while (split[j])
@@ -52,13 +52,11 @@ int8_t	check_if_room_is_stocked(char *room_link, char *link)
 		++i;
 	}
 	return (false);
-	(void)link;
-	(void)room_link;
 }
 
 void	stock_link_with_room_2(t_env *env, int *i)
 {
-	int	j;
+	int		j;
 	char	*room;
 	char	**link;
 
