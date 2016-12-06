@@ -12,27 +12,42 @@
 
 #include "common.h"
 
-char	*fill_print_map(char *s1, char *s2)
+char		*fill_print_map(char *s1, char *s2)
 {
 	s1 = ft_strjoin(s1, s2);
 	s1 = ft_strjoin(s1, "\n");
 	return (s1);
 }
 
-char	*fill_print_map_nbn(char *s1, char *s2)
+char		*fill_print_map_nbn(char *s1, char *s2)
 {
 	s1 = ft_strjoin(s1, s2);
 	return (s1);
 }
 
-int		main(int argc, char **argv)
+static void	print_usage(void)
+{
+	ft_fprintf(1, RED"Usage : ./lem-in < map (Read from stdin)\n"END);
+	ft_fprintf(1, RED"        ./lem-in -f map (Read from file)\n"END);
+	ft_fprintf(1, RED"        ./lem-in -s map (Print step number)\n"END);
+	exit(EXIT_FAILURE);
+}
+
+static void	protect_argc(int argc)
+{
+	if (argc > 3)
+		print_usage();
+}
+
+int			main(int argc, char **argv)
 {
 	t_env	env;
 	int8_t	ret;
-	int		option;
+	int8_t	option;
 
 	ret = 0;
 	option = 0;
+	protect_argc(argc);
 	memset(&env, 0, sizeof(env));
 	if (argv[1] != NULL && (ft_strcmp(argv[1], "-fs") == 0 ||
 	ft_strcmp(argv[1], "-f") == 0))
@@ -51,5 +66,4 @@ int		main(int argc, char **argv)
 		"\nLes fourmis on parcourue %d salles pour atteindre la salle finale\n",
 		env.number_step);
 	ft_2d_tab_free(env.map, env.nb_lines_map);
-	(void)argc;
 }

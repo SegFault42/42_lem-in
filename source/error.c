@@ -38,5 +38,5 @@ void	check_error_gnl(char **line)
 void	print_simple_error(void)
 {
 	ft_fprintf(2, RED"Error\n"END);
-	exit(1);
+	exit(EXIT_FAILURE);
 }

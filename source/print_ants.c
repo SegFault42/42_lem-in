@@ -31,11 +31,9 @@ void	print_ants(t_env *env)
 	int	i;
 	int	save_i;
 	int	nb_ants;
-	int	simultanous_ants;
 
 	i = 0;
 	nb_ants = 1;
-	simultanous_ants = 0;
 	while (env->path[i] == NULL)
 		++i;
 	save_i = i;
