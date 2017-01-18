@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 14:31:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/23 18:55:12 by rabougue         ###   ########.fr       */
+/*   Updated: 2017/01/18 21:40:32 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct			s_env
 	char				**link_two;
 	char				*print_map;
 	int					number_step;
+	bool				write_file;
+	int					fd_file_bonus;
 }						t_env;
 /*
 ** parsing.c

@@ -6,3 +6,12 @@ Error :
 	- plusieurs ##start
 	- ###end au lieu de ##end
 	- ###start au lieu de ##start
+
+
+bonus :
+- lecture depuis un fichier
+- ecriture du resultat dans un fichier
+- couleur map 
+- gestion des messages d'erreur precise
+- nombre de salles parcouru
+- son

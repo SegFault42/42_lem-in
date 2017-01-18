@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/11/23 19:46:16 by rabougue         ###   ########.fr        #
+#    Updated: 2017/01/18 21:47:46 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ END = \033[0m
 ##################################_COMPILATION_#################################
 NAME = lem-in
 CC = gcc
-FLAG = -Wall -Wextra -Werror
+FLAG = #-Wall -Wextra -Werror
 LFT = ./libft/libft.a
 SRC = ./source
 SRCS = $(SRC)/main.c \

@@ -1,0 +1,38 @@
+5
+[31m##start
+[0m[33;5;208msalle_1 0 0
+[0m[33;5;208msalle_2 0 0
+[0m[33;5;208msalle_3 0 0
+[0m[33;5;208msalle_4 0 0
+[0m[31m##end
+[0m[33;5;208msalle_5 0 0
+[0m[38;5;208msalle_1-salle_2
+[0m[38;5;208msalle_2-salle_3
+[0m[38;5;208msalle_3-salle_4
+[0m[38;5;208msalle_4-salle_5
+[0m
+L1-salle_1
+L1-salle_2
+L1-salle_3
+L1-salle_4
+L1-salle_5
+L2-salle_1
+L2-salle_2
+L2-salle_3
+L2-salle_4
+L2-salle_5
+L3-salle_1
+L3-salle_2
+L3-salle_3
+L3-salle_4
+L3-salle_5
+L4-salle_1
+L4-salle_2
+L4-salle_3
+L4-salle_4
+L4-salle_5
+L5-salle_1
+L5-salle_2
+L5-salle_3
+L5-salle_4
+L5-salle_5

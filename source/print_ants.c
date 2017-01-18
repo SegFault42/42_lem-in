@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/23 19:45:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2017/01/18 22:19:56 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	print_ants_2(t_env *env, int *i, int *nb_ants, int save_i)
 	{
 		while (*i < env->nb_rooms_line)
 		{
+			if (env->write_file == true)
+				ft_fprintf(env->fd_file_bonus, "L%d-%s\n", *nb_ants, env->path[*i]);
 			ft_fprintf(1, "L%d-%s\n", *nb_ants, env->path[*i]);
 			++*i;
 		}
 		*i = save_i;
 		++*nb_ants;
 	}
+	system("afplay ./found.mp3");
 }
 
 void	print_ants(t_env *env)
