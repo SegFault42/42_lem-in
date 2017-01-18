@@ -59,6 +59,8 @@ typedef struct			s_env
 	char				*print_map;
 	int					number_step;
 	bool				write_file;
+	bool				sound;
+	uint8_t				time;
 	int					fd_file_bonus;
 }						t_env;
 /*
@@ -111,5 +113,9 @@ char					*fill_print_map(char *s1, char *s2);
 char					*fill_print_map_nbn(char *s1, char *s2);
 void					check_if_room_exist(t_env *env);
 int8_t					check_if_start_and_and_are_connected(t_env *env);
+void					protect_argc(int argc, char **argv);
+int8_t					check_option(t_env *env, char **argv, int argc);
+void					create_file(t_env *env, char *argv);
+void					print_usage();
 
 #endif

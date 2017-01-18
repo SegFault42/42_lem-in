@@ -18,15 +18,18 @@ void	print_ants_2(t_env *env, int *i, int *nb_ants, int save_i)
 	{
 		while (*i < env->nb_rooms_line)
 		{
+			sleep(env->time);
 			if (env->write_file == true)
-				ft_fprintf(env->fd_file_bonus, "L%d-%s\n", *nb_ants, env->path[*i]);
+				ft_fprintf(env->fd_file_bonus, "L%d-%s\n",
+				*nb_ants, env->path[*i]);
 			ft_fprintf(1, "L%d-%s\n", *nb_ants, env->path[*i]);
 			++*i;
 		}
 		*i = save_i;
 		++*nb_ants;
 	}
-	system("afplay ./found.mp3");
+	if (env->sound == true)
+		system("afplay ./found.mp3");
 }
 
 void	print_ants(t_env *env)

@@ -23,7 +23,6 @@ void	print_error(char **map, int y_tab, int8_t err_num)
 	if (err_num == EXIT_ERROR_LINK)
 		ft_fprintf(2, RED"LINK : bad information\n"END);
 	ft_2d_tab_free(map, y_tab);
-	system("afplay ./fail.mp3");
 	exit(EXIT_FAILURE);
 }
 
@@ -32,7 +31,6 @@ void	check_error_gnl(char **line)
 	if (*line == NULL)
 	{
 		ft_fprintf(2, RED"GNL_EXIT_ERROR !\n"END);
-		system("afplay ./fail.mp3");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -40,6 +38,5 @@ void	check_error_gnl(char **line)
 void	print_simple_error(void)
 {
 	ft_fprintf(2, RED"Error\n"END);
-	system("afplay ./fail.mp3");
 	exit(EXIT_FAILURE);
 }

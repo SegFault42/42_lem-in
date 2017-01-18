@@ -35,6 +35,7 @@ SRCS = $(SRC)/main.c \
 	   $(SRC)/algo.c \
 	   $(SRC)/algo_2.c \
 	   $(SRC)/print_ants.c \
+	   $(SRC)/tools.c \
 
 INCLUDE = -I ./include/ -I ./libft/includes/
 
