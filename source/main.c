@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:13:32 by rabougue          #+#    #+#             */
-/*   Updated: 2017/01/18 22:04:03 by rabougue         ###   ########.fr       */
+/*   Updated: 2017/01/19 13:19:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	create_file(t_env *env, char *argv)
 	}
 }
 
-char		*fill_print_map(char *s1, char *s2)
+char	*fill_print_map(char *s1, char *s2)
 {
 	s1 = ft_strjoin(s1, s2);
 	s1 = ft_strjoin(s1, "\n");
 	return (s1);
 }
 
-char		*fill_print_map_nbn(char *s1, char *s2)
+char	*fill_print_map_nbn(char *s1, char *s2)
 {
 	s1 = ft_strjoin(s1, s2);
 	return (s1);
@@ -48,7 +48,7 @@ void	print_usage(void)
 	exit(EXIT_FAILURE);
 }
 
-int			main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_env	env;
 	int8_t	ret;
@@ -57,7 +57,7 @@ int			main(int argc, char **argv)
 	ret = 0;
 	option = 0;
 	protect_argc(argc, argv);
-	memset(&env, 0, sizeof(env));
+	ft_memset(&env, 0, sizeof(env));
 	option = check_option(&env, argv, argc);
 	save_map(&env, option, argv[2]);
 	ret = parsing_map_stdin(&env);
